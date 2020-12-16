@@ -44,6 +44,15 @@ inline void DrawCircle(float x, float y, float r)
 	glEnd();
 }
 
+inline void DrawRect(GLenum mode,float x1, float y1, float x2, float y2)
+{
+	glBegin(mode);
+	glVertex2f(x1, y1);
+	glVertex2f(x2, y1);
+	glVertex2f(x2, y2);
+	glVertex2f(x1, y2);
+	glEnd();
+}
 
 inline void MyPerspective(GLdouble fov, GLdouble aspectRatio, GLdouble zNear, GLdouble zFar)
 {

@@ -2,8 +2,8 @@
 
 using namespace std;
 
-TGLEditDialog::TGLEditDialog(std::tstring text, std::tstring caption, unsigned int mb_code, float width, float height):
-	TGLMessageBox(text,caption,mb_code,width,height),edit(make_unique<TGLEdit>(TEXT(""),FONT_CJK))
+TGLEditDialog::TGLEditDialog(std::tstring text, std::tstring caption, unsigned int mb_code):
+	TGLMessageBox(text,caption,mb_code,1.0f,1.0f),edit(make_unique<TGLEdit>(TEXT(""),FONT_CJK))
 {
 }
 
@@ -28,4 +28,9 @@ int TGLEditDialog::OnLButtonDown(WPARAM mk_code, int x, int y)
 void TGLEditDialog::OnChar(TCHAR tc, LPARAM lParam)
 {
 	edit->OnChar(tc, lParam);
+}
+
+std::tstring TGLEditDialog::GetValue()
+{
+	return edit->GetValue();
 }

@@ -34,7 +34,11 @@ class TFreeType
 {
 protected:
 	float pixel_size;
+	int width_pixel, height_pixel;
+	int max_bearingY_pixel; 
+	int xmin_pixel;
 	std::vector<Character> Characters;
+	float scale;
 public:
 	//class no_char_error :public std::runtime_error
 	//{
@@ -47,5 +51,6 @@ public:
 	//按照像素位置显示文字，x,y以左下角为原点
 	void DrawByPixel(GLfloat x, GLfloat y, GLfloat xscale=1.0f, GLfloat yscale=1.0f);
 
+	void SetFontSizeScale(float i = 1.0f);
 };
 

@@ -2,13 +2,18 @@
 
 #include "Scene.h"
 
+#include "TIniFile.h"
+
 class Scene;
 class SceneController
 {
 private:
 	std::unique_ptr<Scene> scene;
 public:
+	TIniFile ini;
+
 	SceneController(int w, int h);
+	~SceneController();
 	void GoCover(int w, int h);
 	void GoMatch(int w, int h);
 	void OnKeyDown(WPARAM vk_code, LPARAM lParam);

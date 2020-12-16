@@ -1,6 +1,7 @@
 #include "TFreeType.h"
 
 #include <stdexcept>
+#include <algorithm>
 
 #include <freetype/freetype.h>
 #include <freetype/ftbitmap.h>
@@ -20,7 +21,8 @@
 using namespace std;
 
 
-TFreeType::TFreeType(std::tstring s, std::string font_name, int pixel_size):pixel_size(pixel_size)
+TFreeType::TFreeType(std::tstring s, std::string font_name, int pixel_size):
+	pixel_size(pixel_size),width_pixel(0),height_pixel(0),max_bearingY_pixel(INT_MIN),xmin_pixel(INT_MAX),scale(1.0f)
 {
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft))
@@ -35,7 +37,10 @@ TFreeType::TFreeType(std::tstring s, std::string font_name, int pixel_size):pixe
 
 	//glPixelStorei(GL_UNPACK_ALIGNMENT, 1); //禁用byte-alignment限制
 
-	int now_x = 0, now_y = 0;
+	int xmax = INT_MIN;
+	int ymin = INT_MAX, ymax = INT_MIN;
+
+	int x_pixel = 0, y_pixel = 0;
 	for (auto c:s)
 	{
 		FT_UInt glyph_index = FT_Get_Char_Index(face, c);
@@ -66,7 +71,7 @@ TFreeType::TFreeType(std::tstring s, std::string font_name, int pixel_size):pixe
 			data[4 * i + 3] = src[i];
 		}
 
-		// 生成字形纹理
+		/* 生成字形纹理 */
 		GLuint texture;
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
@@ -90,15 +95,36 @@ TFreeType::TFreeType(std::tstring s, std::string font_name, int pixel_size):pixe
 		);
 
 		delete[] data;
+		/* 纹理绑定完成 */
+
 		// 将字符存储到字符表中备用
-		Character character = {
+		int w = face->glyph->bitmap.width;
+		int h = face->glyph->bitmap.rows;
+
+		Character ch = {
 			texture,
-			glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+			glm::ivec2(w, h),
 			glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
 			face->glyph->advance.x
 		};
-		Characters.push_back(character);
+		Characters.push_back(ch);
+
+		/* 坐标计算 */
+		int xpos = x_pixel + ch.Bearing.x;
+		int ypos = y_pixel - (ch.Size.y - ch.Bearing.y);
+		max_bearingY_pixel = max(max_bearingY_pixel, ch.Bearing.y);
+
+
+		xmin_pixel = min(xmin_pixel, ch.Bearing.x);
+		xmax = max(xmax, xpos + w);
+		ymin = min(ymin, ypos);
+		ymax = max(ymax, ypos + h);
+
+		// 更新位置到下一个字形的原点，注意单位是1/64像素
+		x_pixel += ch.Advance >> 6; //(2^6 = 64)
 	}
+	width_pixel = xmax - xmin_pixel;
+	height_pixel = ymax - ymin;
 
 	FT_Done_Face(face);
 	FT_Done_FreeType(ft);
@@ -109,11 +135,11 @@ void TFreeType::DrawByPixel(GLfloat x, GLfloat y, GLfloat xscale,GLfloat yscale)
 	// 对文本中的所有字符迭代
 	for (auto& ch : Characters)
 	{
-		GLfloat xpos = x + ch.Bearing.x * xscale;
-		GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * yscale;
+		GLfloat xpos = x + ch.Bearing.x * xscale*scale;
+		GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * yscale*scale;
 
-		GLfloat w = ch.Size.x * xscale;
-		GLfloat h = ch.Size.y * yscale;
+		GLfloat w = ch.Size.x * xscale*scale;
+		GLfloat h = ch.Size.y * yscale*scale;
 
 			// 当前字符的VBO
 			GLfloat vertices[4][2] = {
@@ -136,6 +162,11 @@ void TFreeType::DrawByPixel(GLfloat x, GLfloat y, GLfloat xscale,GLfloat yscale)
 		glEnd();
 
 		// 更新位置到下一个字形的原点，注意单位是1/64像素
-		x += (ch.Advance >> 6) * xscale; //(2^6 = 64)
+		x += (ch.Advance >> 6) * xscale*scale; //(2^6 = 64)
 	}
+}
+
+void TFreeType::SetFontSizeScale(float i)
+{
+	scale = i;
 }

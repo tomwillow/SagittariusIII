@@ -40,7 +40,7 @@ void TGLButton::DrawByClipCoord(int w, int h, float x1, float y1, float x2, floa
 	EnableTexture();
 
 	glColor4f(1, 1, 1, 1);
-	text->DrawCenterByClipCoord(w, h, (x2 + x1) / 2.0f, (y2 + y1) / 2.0f);
+	text->DrawCenterByClipCoord(w, h, x1,y1,x2,y2);
 }
 
 void TGLButton::OnMouseMove(WPARAM mk_code, int x, int y)

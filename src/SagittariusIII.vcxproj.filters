@@ -96,19 +96,25 @@
     <ClCompile Include="StarRender\StarRender.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TGLDialog.cpp">
+    <ClCompile Include="Common\TIniFile.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TGLMessageBox.cpp">
+    <ClCompile Include="Dialog\TGLEditDialog.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TGLButton.cpp">
+    <ClCompile Include="Dialog\TGLMessageBox.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TGLEditDialog.cpp">
+    <ClCompile Include="Dialog\TGLDialog.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TGLEdit.cpp">
+    <ClCompile Include="GLControl\TGLButton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLControl\TGLEdit.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLNetworkDialog.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -203,19 +209,25 @@
     <ClInclude Include="StarRender\StarRender.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TGLDialog.h">
+    <ClInclude Include="Common\TIniFile.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TGLMessageBox.h">
+    <ClInclude Include="Dialog\TGLMessageBox.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TGLButton.h">
+    <ClInclude Include="Dialog\TGLEditDialog.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TGLEditDialog.h">
+    <ClInclude Include="Dialog\TGLDialog.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TGLEdit.h">
+    <ClInclude Include="GLControl\TGLEdit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLControl\TGLButton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLNetworkDialog.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,7 +21,8 @@ private:
 
     std::unique_ptr<TBoxFreeType> text;
 
-    std::unique_ptr<TGLEditDialog> dialog;
+    std::unique_ptr<TGLEditDialog> editDialog;
+    std::unique_ptr<TGLMessageBox> msgBox;
 public:
     //新建一个StarRender
     SceneMatch(SceneController* controller,int w,int h);

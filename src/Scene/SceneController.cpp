@@ -7,10 +7,16 @@
 using namespace std;
 
 SceneController::SceneController(int w, int h):
-	scene(make_unique<SceneIntro>(this))
+	scene(make_unique<SceneIntro>(this)),
+	ini(TEXT("config.ini"))
 {
 	//GoCover(w,h);
 	GoMatch(w, h);
+}
+
+SceneController::~SceneController()
+{
+	ini.SaveToFile();
 }
 
 void SceneController::GoCover(int w, int h)

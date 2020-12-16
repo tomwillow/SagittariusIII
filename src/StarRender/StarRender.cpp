@@ -139,8 +139,8 @@ void StarRender::Draw(int w, int h, float t)
 		{
 			//glm::vec2 p2 = WorldToClip(star.p, projection);
 
-			//	glColor4f(star.color.r,star.color.g,star.color.b,star.color.a);
 			//	glVertex2f(p2.x, p2.y);
+			glColor4f(star.color.r, star.color.g, star.color.b, star.color.a);
 
 			glVertex4f(p.x, p.y, p.z, p.w);
 

@@ -14,7 +14,18 @@ TGLMessageBox::TGLMessageBox(std::tstring text, std::tstring caption, unsigned i
 		buttons.emplace_back(TEXT("取消"), FONT_CJK);
 		return;
 	}
+	if (mb_code == MB_OK)
+	{
+		buttons.emplace_back(TEXT("确定"), FONT_CJK);
+		return;
+	}
+
 	assert(0);
+}
+
+TGLMessageBox::TGLMessageBox(std::tstring text, std::tstring caption, unsigned int mb_code):
+	TGLMessageBox(text,caption,mb_code,0.8f,0.8f)
+{
 }
 
 void TGLMessageBox::Draw(int w, int h)
@@ -26,6 +37,7 @@ void TGLMessageBox::Draw(int w, int h)
 
 	//content
 	EnableTexture();
+	//text->SetFontSizeScale(0.5f);
 	text->DrawByClipCoord(w, h,x1+x_margin,y1+bottom_margin,x2-x_margin,y2-top_margin);
 
 	//buttons
@@ -61,6 +73,11 @@ int TGLMessageBox::OnLButtonDown(WPARAM mk_code, int x, int y)
 			return IDOK;
 		if (buttons[1].OnLButtonDown(mk_code, x, y))
 			return IDCANCEL;
+	}
+	if (mb_code == MB_OK)
+	{
+		if (buttons[0].OnLButtonDown(mk_code, x, y))
+			return IDOK;
 	}
 	return 0;
 }
