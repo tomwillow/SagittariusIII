@@ -24,6 +24,10 @@ protected:
 public:
 	TGLMessageBox(std::tstring text,std::tstring caption,unsigned int mb_code);
 	void Draw(int w, int h);
+
+	virtual int WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+	virtual int OnKeyDown(WPARAM vk_code, LPARAM lParam);
 	virtual void OnMouseMove(WPARAM mk_code, int x, int y);
 	virtual int OnLButtonDown(WPARAM mk_code, int x, int y);
 };

@@ -35,6 +35,7 @@ TWindow::~TWindow()
 		m_pParent->childs[this] = false;
 }
 
+
 void TWindow::RegisterMessage(UINT uMsg, PMsgDealer pFunc)
 {
 	msgDealer[uMsg] = pFunc;
@@ -45,7 +46,7 @@ LRESULT TWindow::WndProc(WNDPROC defProc, HWND hWnd, UINT uMsg, WPARAM wParam, L
 	auto it = msgDealer.find(uMsg);
 	if (it != msgDealer.end())
 	{
-		return it->second(this, wParam, lParam);
+		return it->second(this,uMsg, wParam, lParam);
 	}
 	switch (uMsg)
 	{

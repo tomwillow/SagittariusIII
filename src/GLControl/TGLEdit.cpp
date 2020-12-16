@@ -58,10 +58,18 @@ void TGLEdit::OnChar(TCHAR tc, LPARAM lParam)
 		cursor_pos++;
 	}
 	else
-		if (tc == TEXT('\b') && !s.empty())
+		if (!s.empty())
 		{
-			s.pop_back();
-			cursor_pos--;
+			switch (tc)
+			{
+			case TEXT('\b'):
+				s.pop_back();
+				cursor_pos--;
+				break;
+			case VK_LEFT:
+				cursor_pos--;
+				break;
+			}
 		}
 
 	if (s.empty())

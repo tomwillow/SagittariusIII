@@ -6,23 +6,67 @@
 
 using namespace std;
 
+void SceneController::PlayBGMThread()
+{
+	stopBGM = false;
+	while (!stopBGM)
+	{
+		renderBGM->Render();
+		waveoutBGM->PlayAudio(renderBGM->buf, renderBGM->buf_size);
+	}
+}
+
 SceneController::SceneController(int w, int h):
 	scene(make_unique<SceneIntro>(this)),
-	ini(TEXT("config.ini"))
+	ini(TEXT("config.ini")),
+	stopBGM(true),
+	receivedMsg({WM_KEYDOWN,WM_CHAR,WM_MOUSEMOVE,WM_LBUTTONDOWN})
 {
+	wavefile = make_unique<WaveFile>();
+
+	//
+	waveoutBGM = make_unique<WaveOut>(wavefile->GetHeader());
+	waveoutBGM->Start();
+	renderBGM = make_unique<NSFRender>(SND_TITLE, wavefile->GetHeader());
+
+	//
+	waveoutSelect = make_unique<WaveOut>(wavefile->GetHeader(), 200);
+	waveoutSelect->Start();
+	renderSelect = make_unique<NSFRender>(SND_SELECT, wavefile->GetHeader(), 200);
+
+
 	//GoCover(w,h);
 	GoMatch(w, h);
 }
 
 SceneController::~SceneController()
 {
+	stopBGM = true;
+	if (t.joinable())
+		t.join();
+
 	ini.SaveToFile();
+}
+
+
+void SceneController::PlayBGM()
+{
+	if (!t.joinable())
+		t = thread(&SceneController::PlayBGMThread, this);
+}
+
+void SceneController::PlaySoundEffect()
+{
+	renderSelect->Reset();
+	renderSelect->Render();
+	waveoutSelect->PlayAudio(renderSelect->buf, renderSelect->buf_size);
 }
 
 void SceneController::GoCover(int w, int h)
 {
 	scene=make_unique<SceneCover>(this);
 	scene->Start(w, h);
+	//PlayBGM();
 }
 
 void SceneController::GoMatch(int w, int h)
@@ -39,29 +83,9 @@ void SceneController::GoMatch(int w, int h)
 	}
 }
 
-void SceneController::OnKeyDown(WPARAM vk_code, LPARAM lParam)
+int SceneController::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	scene->OnKeyDown(vk_code, lParam);
-}
-
-void SceneController::OnChar(TCHAR tc, LPARAM lParam)
-{
-	scene->OnChar(tc, lParam);
-}
-
-void SceneController::OnMouseMove(WPARAM mk_code, int x, int y)
-{
-	scene->OnMouseMove(mk_code, x, y);
-}
-
-void SceneController::OnLButtonDown(WPARAM mk_code, int x, int y)
-{
-	scene->OnLButtonDown(mk_code, x, y);
-}
-
-void SceneController::OnLButtonUp(WPARAM mk_code, int x, int y)
-{
-	scene->OnLButtonUp(mk_code, x, y);
+	return scene->WndProc(uMsg, wParam, lParam);
 }
 
 void SceneController::Render(int w, int h)

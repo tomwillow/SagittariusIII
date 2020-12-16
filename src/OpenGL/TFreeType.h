@@ -52,5 +52,6 @@ public:
 	void DrawByPixel(GLfloat x, GLfloat y, GLfloat xscale=1.0f, GLfloat yscale=1.0f);
 
 	void SetFontSizeScale(float i = 1.0f);
+	float GetClipCoordHeight(int H);
 };
 

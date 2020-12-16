@@ -7,22 +7,25 @@ TGLEditDialog::TGLEditDialog(std::tstring text, std::tstring caption, unsigned i
 {
 }
 
+int TGLEditDialog::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg)
+	{
+	case WM_CHAR:
+		edit->OnChar(wParam, lParam);
+		return 0;
+	default:
+		return this->TGLMessageBox::WndProc(uMsg, wParam, lParam);
+	}
+	return 0;
+}
+
 void TGLEditDialog::Draw(int w, int h)
 {
 	this->TGLMessageBox::Draw(w, h);
 
 	float edit_y2 = y2 - top_margin - text_height - 0.05f;
 	edit->DrawByClipCoord(w, h, x1 + x_margin, edit_y2-text_height, x2 - x_margin, edit_y2);
-}
-
-void TGLEditDialog::OnMouseMove(WPARAM mk_code, int x, int y)
-{
-	this->TGLMessageBox::OnMouseMove(mk_code, x, y);
-}
-
-int TGLEditDialog::OnLButtonDown(WPARAM mk_code, int x, int y)
-{
-	return this->TGLMessageBox::OnLButtonDown(mk_code, x, y);
 }
 
 void TGLEditDialog::OnChar(TCHAR tc, LPARAM lParam)

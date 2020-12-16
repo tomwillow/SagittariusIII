@@ -37,7 +37,7 @@ private:
 	std::unordered_map<TWindow*,bool> childs;
 
 	//用于事件监听回调
-	using PMsgDealer = std::function<LRESULT(TWindow*, WPARAM, LPARAM)>;//返回值：0不启用默认处理 LRESULT(*)(TWindow* pWin,WPARAM wParam, LPARAM lParam)
+	using PMsgDealer = std::function<LRESULT(TWindow*,UINT, WPARAM, LPARAM)>;//返回值：0不启用默认处理 LRESULT(*)(TWindow* pWin,WPARAM wParam, LPARAM lParam)
 	std::unordered_map<UINT, PMsgDealer > msgDealer;//key:uMsg; value:PMsgDealer
 
 	//注册对应类名的窗口类，注册失败抛出异常
@@ -99,7 +99,7 @@ public:
 	void SetDoubleBuffer(bool bDoubleBuffer = true);
 	void SetDrawSelf(bool bDrawSelf = true);
 
-	//
+	//注册自定义消息函数
 	void RegisterMessage(UINT uMsg, PMsgDealer pFun);
 
 	HWND GetHWND();

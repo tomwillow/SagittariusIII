@@ -9,6 +9,7 @@
 #include "TBoxFreeType.h"
 
 #include "TGLEditDialog.h"
+#include "GLNetworkDialog.h"
 
 #include "ExternResource.h"
 
@@ -23,15 +24,16 @@ private:
 
     std::unique_ptr<TGLEditDialog> editDialog;
     std::unique_ptr<TGLMessageBox> msgBox;
+    std::unique_ptr<GLNetworkDialog> searchDialog;
 public:
     //新建一个StarRender
     SceneMatch(SceneController* controller,int w,int h);
 
     //将传入的StarRender转移所有权
     SceneMatch(SceneController* controller,std::unique_ptr<StarRender> &lastStarRender);
-    void OnChar(TCHAR tc, LPARAM lParam) override;
-    virtual void OnMouseMove(WPARAM mk_code, int x, int y) override;
-    virtual void OnLButtonDown(WPARAM mk_code, int x, int y) override;
+
+    virtual int WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam) override;
+
 	void Render(int w, int h);
 
     friend class SceneController;

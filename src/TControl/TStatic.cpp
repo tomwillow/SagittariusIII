@@ -16,7 +16,7 @@ void TStatic::Create(TWindow* pParent,RECT rect)
 void TStatic::SetTransparent()
 {
 	assert(m_pParent);
-	m_pParent->RegisterMessage(WM_CTLCOLORSTATIC, [](TWindow *pWin,WPARAM wParam, LPARAM lParam)
+	m_pParent->RegisterMessage(WM_CTLCOLORSTATIC, [](TWindow *pWin,UINT uMsg,WPARAM wParam, LPARAM lParam)
 		{
 			HDC hdcStatic = (HDC)wParam;
 			SetBkMode(hdcStatic, TRANSPARENT);

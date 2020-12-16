@@ -59,6 +59,34 @@ void TGLMessageBox::Draw(int w, int h)
 	}
 }
 
+int TGLMessageBox::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg)
+	{
+	case WM_KEYDOWN:
+		return OnKeyDown(wParam, lParam);
+	case WM_LBUTTONDOWN:
+		return OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+	case WM_MOUSEMOVE:
+		OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+		return 0;
+	}
+	return 0;
+}
+
+int TGLMessageBox::OnKeyDown(WPARAM vk_code, LPARAM lParam)
+{
+	switch (mb_code)
+	{
+	case MB_OKCANCEL:
+	case MB_OK:
+		if (vk_code == VK_RETURN)
+			return IDOK;
+		break;
+	}
+	return 0;
+}
+
 void TGLMessageBox::OnMouseMove(WPARAM mk_code, int x, int y)
 {
 	for (auto& btn : buttons)

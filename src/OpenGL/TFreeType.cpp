@@ -170,3 +170,10 @@ void TFreeType::SetFontSizeScale(float i)
 {
 	scale = i;
 }
+
+
+float TFreeType::GetClipCoordHeight(int H)
+{
+	float yscale = 2.0f / H;
+	return height_pixel * yscale * scale;
+}

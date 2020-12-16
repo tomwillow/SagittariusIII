@@ -3,8 +3,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <functional>
 
-#include <WindowsX.h>
-
 #include <stdexcept>
 
 #include "TButton.h"
@@ -15,6 +13,7 @@ void MainWindow::OnCreate(CREATESTRUCT* pCS)
 {
 	try
 	{
+		//初始化controller
 		::GetClientRect(m_hWnd, &ClientRect);
 		controller = make_unique<SceneController>(ClientRect.right,ClientRect.bottom);
 	}
@@ -25,30 +24,13 @@ void MainWindow::OnCreate(CREATESTRUCT* pCS)
 		exit(-1);
 	}
 
-	this->RegisterMessage(WM_KEYDOWN, [&](TWindow* pCtrl, WPARAM wParam, LPARAM lParam)->LRESULT {
-		controller->OnKeyDown(wParam, lParam);
-		return 1;
-		});
-
-	this->RegisterMessage(WM_MOUSEMOVE, [&](TWindow* pCtrl, WPARAM wParam, LPARAM lParam)->LRESULT {
-		controller->OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-		return 1;
-		});
-
-	this->RegisterMessage(WM_LBUTTONDOWN, [&](TWindow* pCtrl, WPARAM wParam, LPARAM lParam)->LRESULT {
-		controller->OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-		return 1;
-		});
-
-	this->RegisterMessage(WM_LBUTTONUP, [&](TWindow* pCtrl, WPARAM wParam, LPARAM lParam)->LRESULT {
-		controller->OnLButtonUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-		return 1;
-		});
-
-	this->RegisterMessage(WM_CHAR, [&](TWindow* pCtrl, WPARAM wParam, LPARAM lParam)->LRESULT {
-		controller->OnChar((TCHAR)wParam, lParam);
-		return 1;
-		});
+	//将消息转发至controller
+	for (auto msg : controller->receivedMsg)
+	{
+		this->RegisterMessage(msg, [&](TWindow* pCtrl,UINT uMsg, WPARAM wParam, LPARAM lParam)->LRESULT {
+			return controller->WndProc(uMsg,wParam,lParam);
+			});
+	}
 }
 
 bool MainWindow::OnDraw(HDC hdc)
@@ -63,6 +45,6 @@ bool MainWindow::OnDraw(HDC hdc)
 void MainWindow::Render()
 {
 	controller->Render(ClientRect.right,ClientRect.bottom);
-	//SetText(std::tto_string(fps));
+	SetText(std::tto_string(fps));
 }
 #endif
