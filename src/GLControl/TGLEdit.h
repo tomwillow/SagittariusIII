@@ -24,6 +24,7 @@ public:
 	//virtual void OnMouseMove(WPARAM mk_code, int x, int y);
 	//virtual int OnLButtonDown(WPARAM mk_code, int x, int y);
 	virtual void OnChar(TCHAR tc, LPARAM lParam);
+	virtual void OnKeyDown(WPARAM vk_code, LPARAM lParam);
 	std::tstring GetValue();
 };
 

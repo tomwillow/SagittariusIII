@@ -7,13 +7,13 @@
 using namespace std;
 
 TGLDialog::TGLDialog(float width, float height):width(width),height(height),
-bk(make_unique<TTexture>(IMG_DIALOG_BG))
+bk(make_unique<TTexture>(IMG_DIALOG_BG)),fade_time(0.1f)
 {
+	t0 = (float)GetTickCount() / 1000.0f;
 }
 
 void TGLDialog::Draw(int w, int h)
 {
-	static float t0 = (float)GetTickCount() / 1000.0f;
 	t = (float)GetTickCount() / 1000.0f-t0;
 
 	EnableTexture();

@@ -122,13 +122,13 @@ void TBoxFreeType::DrawCenterByClipCoord(int w, int h, float x1, float y1, float
 	float cx = (x1 + x2) / 2.0f, cy = (y1 + y2) / 2.0f;
 
 
-	float clip_xmin = (float)xmin_pixel / (float)w * 2.0f;
-	float clip_width = (float)width_pixel / (float)w * 2.0f;
-	float clip_height = (float)height_pixel / (float)h * 2.0f;
-	float clip_max_bearingY = (float)max_bearingY_pixel / (float)h * 2.0f;
+	float clip_xmin = (float)xmin_pixel / (float)w * 2.0f*scale;
+	float clip_width = (float)width_pixel / (float)w * 2.0f * scale;
+	float clip_height = (float)height_pixel / (float)h * 2.0f * scale;
+	float clip_max_bearingY = (float)max_bearingY_pixel / (float)h * 2.0f * scale;
 
 	//
-	float x_size = (float)pixel_size / w * 2.0f, y_size = (float)pixel_size / h * 2.0f;
+	//float x_size = (float)pixel_size / w * 2.0f, y_size = (float)pixel_size / h * 2.0f;
 
 	float x = cx - (clip_xmin + clip_width / 2.0f);
 	float y = cy - (clip_max_bearingY - clip_height / 2.0f);

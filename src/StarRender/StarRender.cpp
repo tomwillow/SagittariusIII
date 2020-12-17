@@ -85,7 +85,8 @@ void StarRender::AddTexStar(float t0)
 	tex_stars.emplace_back(p, vz, t0, Star::ST_TEXTURE, tex_id, color);
 }
 
-StarRender::StarRender(int w, int h)
+StarRender::StarRender(int w, int h) :
+	point_count(100), tex_count(50)
 {
 	//
 	textures.emplace_back(STAR00);
@@ -205,5 +206,4 @@ void StarRender::Draw(int w, int h, float t)
 
 	for (int i = 0; i < tex_count - tex_nun; ++i)
 		AddTexStar(t);
-
 }

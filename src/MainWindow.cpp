@@ -45,6 +45,8 @@ bool MainWindow::OnDraw(HDC hdc)
 void MainWindow::Render()
 {
 	controller->Render(ClientRect.right,ClientRect.bottom);
+#ifdef _DEBUG
 	SetText(std::tto_string(fps));
+#endif
 }
 #endif

@@ -8,7 +8,7 @@
 
 #include "TBoxFreeType.h"
 
-#include "TGLEditDialog.h"
+#include "GLUsernameDialog.h"
 #include "GLNetworkDialog.h"
 
 #include "ExternResource.h"
@@ -22,8 +22,7 @@ private:
 
     std::unique_ptr<TBoxFreeType> text;
 
-    std::unique_ptr<TGLEditDialog> editDialog;
-    std::unique_ptr<TGLMessageBox> msgBox;
+    std::unique_ptr<GLUsernameDialog> usernameDialog;
     std::unique_ptr<GLNetworkDialog> searchDialog;
 public:
     //新建一个StarRender
@@ -34,7 +33,7 @@ public:
 
     virtual int WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
-	void Render(int w, int h);
+	void Render(int w, int h)override;
 
     friend class SceneController;
 };

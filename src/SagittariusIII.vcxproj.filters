@@ -99,22 +99,40 @@
     <ClCompile Include="Common\TIniFile.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Dialog\TGLEditDialog.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Dialog\TGLMessageBox.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Dialog\TGLDialog.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="GLControl\TGLButton.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="GLControl\TGLEdit.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="GLNetworkDialog.cpp">
+    <ClCompile Include="GLDialog\TGLDialog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLDialog\TGLEditDialog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLDialog\TGLMessageBox.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\GLNetworkDialog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\GLUsernameDialog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\MySocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ScenePrepRoom.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLTeamButton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TGLColorCombo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameAI.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -212,22 +230,43 @@
     <ClInclude Include="Common\TIniFile.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Dialog\TGLMessageBox.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Dialog\TGLEditDialog.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Dialog\TGLDialog.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="GLControl\TGLEdit.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="GLControl\TGLButton.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="GLNetworkDialog.h">
+    <ClInclude Include="GLDialog\TGLMessageBox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLDialog\TGLDialog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLDialog\TGLEditDialog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\GLUsernameDialog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\GLNetworkDialog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\MySocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ScenePrepRoom.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTeamButton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TGLColorCombo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameAI.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

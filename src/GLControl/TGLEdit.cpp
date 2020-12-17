@@ -2,6 +2,8 @@
 
 #include "gl_assist.h"
 
+#include "ColorConfig.h"
+
 using namespace std;
 
 TGLEdit::TGLEdit(std::tstring s, std::string font_name, int pixel_size) :
@@ -16,11 +18,11 @@ void TGLEdit::DrawByClipCoord(int w, int h, float x1, float y1, float x2, float 
 	EnableGeometry();
 
 	//background
-	glColor4f(0.0f, 0.5f, 0.8f, 0.5f);
+	ApplyEditBackground();
 	DrawRect(GL_QUADS, x1, y1, x2, y2);
 
 	//border
-	glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+	ApplyEditBorder();
 	DrawRect(GL_LINE_LOOP, x1, y1, x2, y2);
 
 	if (text)
@@ -54,7 +56,8 @@ void TGLEdit::OnChar(TCHAR tc, LPARAM lParam)
 {
 	if (tc >= 0x20)
 	{
-		s += tc;
+		//s += tc;
+		s.insert(s.begin() + cursor_pos, tc);
 		cursor_pos++;
 	}
 	else
@@ -63,11 +66,11 @@ void TGLEdit::OnChar(TCHAR tc, LPARAM lParam)
 			switch (tc)
 			{
 			case TEXT('\b'):
-				s.pop_back();
-				cursor_pos--;
-				break;
-			case VK_LEFT:
-				cursor_pos--;
+				if (cursor_pos > 0)
+				{
+					s.erase(cursor_pos - 1, 1);
+					cursor_pos--;
+				}
 				break;
 			}
 		}
@@ -77,6 +80,21 @@ void TGLEdit::OnChar(TCHAR tc, LPARAM lParam)
 	else
 	{
 		text = make_unique<TBoxFreeType>(s, FONT_CJK);
+	}
+}
+
+void TGLEdit::OnKeyDown(WPARAM vk_code, LPARAM lParam)
+{
+	switch (vk_code)
+	{
+	case VK_LEFT:
+		if (!s.empty() && cursor_pos > 0)
+			cursor_pos--;
+		break;
+	case VK_RIGHT:
+		if (!s.empty() && cursor_pos < s.size())
+			cursor_pos++;
+		break;
 	}
 }
 

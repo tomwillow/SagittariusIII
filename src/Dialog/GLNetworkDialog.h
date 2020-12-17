@@ -8,10 +8,14 @@
 
 #include "ExternResource.h"
 
+#define IDIPCONNECT 101
+#define IDBUILDROOM 102
+
 class GLNetworkDialog :
     public TGLDialog
 {
 private:
+	SceneController* controller;
 	const float x_margin = 0.08f;
 	const float top_margin = 0.15f;
 	const float bottom_margin = 0.2f;
@@ -22,7 +26,7 @@ private:
 	std::unique_ptr<TGLEditDialog> ipDialog;
 	std::unique_ptr<TGLMessageBox> ipMsgBox;
 public:
-	GLNetworkDialog();
+	GLNetworkDialog(SceneController* in_controller);
 
 	void Draw(int w, int h);
 

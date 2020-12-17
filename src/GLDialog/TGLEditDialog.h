@@ -16,7 +16,7 @@ public:
 
 	virtual void OnChar(TCHAR tc, LPARAM lParam);
 
-	std::tstring GetValue();
-	void Draw(int w, int h);
+	virtual std::tstring GetValue();
+	virtual void Draw(int w, int h);
 };
 

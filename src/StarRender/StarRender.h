@@ -13,8 +13,8 @@
 class StarRender
 {
 private:
-    const int point_count = 100;
-    const int tex_count = 50;
+    const int point_count;
+    const int tex_count;
     glm::mat4 projection;
     std::vector<TTexture> textures;//ºãĞÇÌùÍ¼
     std::vector<TTexture> tex_sos;//sos»Õ±êÌùÍ¼

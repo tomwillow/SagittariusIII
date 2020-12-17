@@ -13,11 +13,11 @@ private:
 	std::unique_ptr<TTexture> bk;
 protected:
 	float x1, y1, x2, y2;
-	const float fade_time = 0.1f;
-	float t;
+	const float fade_time;
+	float t0,t;
 	float width, height;
 public:
 	TGLDialog(float width, float height);
-	void Draw(int w, int h);
+	virtual void Draw(int w, int h);
 };
 

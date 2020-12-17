@@ -1,19 +1,33 @@
+#include "MySocket.h"
+
+#include "SceneController.h"
+
 #include "GLNetworkDialog.h"
+
+#include "gl_assist.h"
+
+#include "ColorConfig.h"
 
 using namespace std;
 
-GLNetworkDialog::GLNetworkDialog():
+GLNetworkDialog::GLNetworkDialog(SceneController* in_controller) :
+	controller(in_controller),
 	TGLDialog(1.5f,1.5f),
 	text(make_unique<TBoxFreeType>(TEXT("搜索局域网房间："), FONT_CJK, text_pixel))
 {
 	buttons.emplace_back(TEXT("IP直连"), FONT_CJK, text_pixel);
-	buttons.emplace_back(TEXT("开设房间"), FONT_CJK, text_pixel);
+	buttons.emplace_back(TEXT("创建房间"), FONT_CJK, text_pixel);
 	buttons.emplace_back(TEXT("取消"), FONT_CJK, text_pixel);
 }
 
 void GLNetworkDialog::Draw(int w, int h)
 {
 	this->TGLDialog::Draw(w, h);
+
+	if (t < fade_time)
+		return;
+
+	EnableTexture();
 
 	text_height = text->GetClipCoordHeight(h);
 	text->DrawVCenterByClipCoord(w, h, x1+x_margin, y2-top_margin - text_height, x2-x_margin, y2-top_margin);
@@ -38,6 +52,14 @@ void GLNetworkDialog::Draw(int w, int h)
 		button_x += button_width+button_interval;
 	}
 
+	//draw list
+	EnableGeometry(); 
+	ApplyEditBackground();
+	DrawRect(GL_QUADS, button_left, list_bottom, button_right, list_top);
+
+	ApplyEditBorder();
+	DrawRect(GL_LINE_LOOP, button_left, list_bottom, button_right, list_top);
+
 	//
 	if (ipDialog)
 	{
@@ -57,6 +79,7 @@ int GLNetworkDialog::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		if (ipMsgBox->WndProc(uMsg, wParam, lParam) == IDOK)
 		{
+			controller->PlaySoundEffect();
 			ipMsgBox = nullptr;
 		}
 		return 0;
@@ -68,13 +91,19 @@ int GLNetworkDialog::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		int key = ipDialog->WndProc(uMsg, wParam, lParam);
 		if (key == IDOK)
 		{
+			controller->PlaySoundEffect();
 			tstring sip = ipDialog->GetValue();
 			//
+			if (CheckIP(wstring2string(sip)))
+			{
 
-			ipMsgBox= make_unique<TGLEditDialog>(TEXT("IP格式不正确。"), TEXT(""), MB_OK);
+			}
+			else
+				ipMsgBox= make_unique<TGLMessageBox>(TEXT("IP格式不正确。"), TEXT(""), MB_OK);
 		}
 		if (key == IDCANCEL)
 		{
+			controller->PlaySoundEffect();
 			ipDialog = nullptr;
 		}
 		return 0;
@@ -95,12 +124,23 @@ int GLNetworkDialog::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		key = buttons[0].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 		if (key)
 		{
+			controller->PlaySoundEffect();
 			ipDialog = make_unique<TGLEditDialog>(TEXT("请输入服务器IP："), TEXT(""), MB_OKCANCEL);
+		}
+
+		key = buttons[1].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+		if (key)
+		{
+			controller->PlaySoundEffect();
+			return IDBUILDROOM;
 		}
 
 		key = buttons[2].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 		if (key)
+		{
+			controller->PlaySoundEffect();
 			return IDCANCEL;
+		}
 		break;
 	}
 	}

@@ -37,6 +37,7 @@ public:
 
 	void GoCover(int w, int h);
 	void GoMatch(int w, int h);
+	void GoPrepRoom(int w, int h);
 
 	std::set<UINT> receivedMsg;
 	int WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam);

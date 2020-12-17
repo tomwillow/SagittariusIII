@@ -7,72 +7,45 @@
 using namespace std;
 
 SceneMatch::SceneMatch(SceneController* controller, int w, int h) :
-	Scene(controller), text(nullptr), msgBox(nullptr),searchDialog(nullptr)
+	Scene(controller), text(nullptr),searchDialog(nullptr)
 {
 	starRender = make_unique<StarRender>(w, h);
 
 	if (controller->ini.GetValue(TEXT("username")).empty())
-		editDialog = make_unique<TGLEditDialog>(TEXT("请输入用户名："), TEXT(""), MB_OKCANCEL);
+		usernameDialog = make_unique<GLUsernameDialog>(controller);
 	else
-		searchDialog = make_unique<GLNetworkDialog>();
+		searchDialog = make_unique<GLNetworkDialog>(controller);
 }
 
 SceneMatch::SceneMatch(SceneController* controller, std::unique_ptr<StarRender>& lastStarRender) :
-	Scene(controller), text(nullptr), msgBox(nullptr), searchDialog(nullptr)
+	Scene(controller), text(nullptr),searchDialog(nullptr)
 {
 	starRender.reset(lastStarRender.release());
 
 	if (controller->ini.GetValue(TEXT("username")).empty())
-		editDialog = make_unique<TGLEditDialog>(TEXT("请输入用户名："), TEXT(""), MB_OKCANCEL);
+		usernameDialog = make_unique<GLUsernameDialog>(controller);
 	else
-		searchDialog = make_unique<GLNetworkDialog>();
+		searchDialog = make_unique<GLNetworkDialog>(controller);
 }
 
 int SceneMatch::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	if (msgBox)
+	if (usernameDialog)
 	{
-		int key = msgBox->WndProc(uMsg, wParam, lParam);
+		int key = usernameDialog->WndProc(uMsg, wParam, lParam);
 		if (key == IDOK)
 		{
-			controller->PlaySoundEffect();
-			msgBox = nullptr;
-		}
-		return 0;
-	}
-
-	if (editDialog)
-	{
-		int key = editDialog->WndProc(uMsg, wParam, lParam);
-		if (key == IDOK)
-		{
-			controller->PlaySoundEffect();
-			tstring username = editDialog->GetValue();
-			if (username.empty())
-			{
-				msgBox = make_unique<TGLMessageBox>(TEXT("用户名不正确。"), TEXT(""), MB_OK);
-				return 0;
-			}
-			if (username.find(TEXT(' ')) != tstring::npos)
-			{
-				msgBox = make_unique<TGLMessageBox>(TEXT("不能有空格。"), TEXT(""), MB_OK);
-				return 0;
-			}
-
-			//输入用户名成功
-			controller->ini.SetValue(TEXT("username"), username);
+			controller->ini.SetValue(TEXT("username"), usernameDialog->GetValue());
 			controller->ini.SaveToFile();
-			editDialog = nullptr;
 
-			searchDialog = make_unique<GLNetworkDialog>();
-			
-			return 0;
+			usernameDialog = nullptr;
+
+			searchDialog = make_unique<GLNetworkDialog>(controller);
 		}
 		if (key == IDCANCEL)
 		{
-			controller->PlaySoundEffect();
-			controller->GoCover(W, H);
-			return 0;
+		//controller->PlaySoundEffect();
+		controller->GoCover(W, H);
 		}
 		return 0;
 	}
@@ -80,9 +53,15 @@ int SceneMatch::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	if (searchDialog)
 	{
 		int key=searchDialog->WndProc(uMsg, wParam, lParam);
+		if (key == IDBUILDROOM)
+		{
+			//controller->PlaySoundEffect();
+			controller->GoPrepRoom(W, H);
+			return 0;
+		}
 		if (key == IDCANCEL)
 		{
-			controller->PlaySoundEffect();
+			//controller->PlaySoundEffect();
 			controller->GoCover(W, H);
 			return 0;
 		}
@@ -100,11 +79,8 @@ void SceneMatch::Render(int w, int h)
 
 	starRender->Draw(w, h, t);
 
-	if (editDialog)
-		editDialog->Draw(w, h);
-
-	if (msgBox)
-		msgBox->Draw(w, h);
+	if (usernameDialog)
+		usernameDialog->Draw(w, h);
 
 	if (searchDialog)
 		searchDialog->Draw(w, h);

@@ -4,10 +4,13 @@
 #include <gl\GL.h>
 #include "gl_assist.h"
 
+#include "ColorConfig.h"
+
 using namespace std;
 
 TGLButton::TGLButton(std::tstring s, std::string font_name, int pixel_size):
-	text(make_unique<TBoxFreeType>(s,font_name,pixel_size)),is_hover(false)
+	text(make_unique<TBoxFreeType>(s,font_name,pixel_size)),is_hover(false),
+	font_name(font_name),pixel_size(pixel_size),enable(true)
 {
 }
 
@@ -22,19 +25,17 @@ void TGLButton::DrawByClipCoord(int w, int h, float x1, float y1, float x2, floa
 	//btn background
 	EnableGeometry();
 
-	if (is_hover)
-		glColor4ub(83, 117, 238, 128);
+	if (enable)
+	{
+		if (is_hover)
+			ApplyButtonHover();
+		else
+			ApplyButtonBackground();
+	}
 	else
-		glColor4ub(83, 117, 238, 255);	
+		ApplyButtonDisable();
 
-	/** 开始绘制四边形 */
-	glBegin(GL_QUADS);
-
-	glTexCoord2f(0.0f, 0.0f); glVertex2f(x1, y1);
-	glTexCoord2f(1.0f, 0.0f); glVertex2f(x2, y1);
-	glTexCoord2f(1.0f, 1.0f); glVertex2f(x2, y2);
-	glTexCoord2f(0.0f, 1.0f); glVertex2f(x1, y2);
-	glEnd();
+	DrawRect(GL_QUADS, x1, y1, x2, y2);
 
 	//button text
 	EnableTexture();
@@ -45,6 +46,7 @@ void TGLButton::DrawByClipCoord(int w, int h, float x1, float y1, float x2, floa
 
 void TGLButton::OnMouseMove(WPARAM mk_code, int x, int y)
 {
+	if (!enable) return;
 	float x_clip = ZeroOne2Clip((float)x / (float)W);
 	float y_clip = ZeroOne2Clip((float)(H-y) / (float)H);
 	is_hover = (x_clip >= x1 && x_clip <= x2 && y_clip >= y1 && y_clip <= y2);
@@ -55,5 +57,29 @@ void TGLButton::OnMouseMove(WPARAM mk_code, int x, int y)
 
 int TGLButton::OnLButtonDown(WPARAM mk_code, int x, int y)
 {
+	if (!enable) return 0;
+	float x_clip = ZeroOne2Clip((float)x / (float)W);
+	float y_clip = ZeroOne2Clip((float)(H - y) / (float)H);
+	is_hover = (x_clip >= x1 && x_clip <= x2 && y_clip >= y1 && y_clip <= y2);
 	return is_hover;
+}
+
+int TGLButton::OnRButtonDown(WPARAM mk_code, int x, int y)
+{
+	return this->TGLButton::OnLButtonDown(mk_code, x, y);
+}
+
+void TGLButton::SetFontSizeScale(float i)
+{
+	text->SetFontSizeScale(i);
+}
+
+float TGLButton::GetClipCoordHeight(int H)
+{
+	return text->GetClipCoordHeight(H);
+}
+
+void TGLButton::SetEnable(bool enable)
+{
+	this->enable = enable;
 }

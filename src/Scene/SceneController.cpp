@@ -3,6 +3,7 @@
 #include "SceneIntro.h"
 #include "SceneCover.h"
 #include "SceneMatch.h"
+#include "ScenePrepRoom.h"
 
 using namespace std;
 
@@ -20,7 +21,7 @@ SceneController::SceneController(int w, int h):
 	scene(make_unique<SceneIntro>(this)),
 	ini(TEXT("config.ini")),
 	stopBGM(true),
-	receivedMsg({WM_KEYDOWN,WM_CHAR,WM_MOUSEMOVE,WM_LBUTTONDOWN})
+	receivedMsg({WM_KEYDOWN,WM_CHAR,WM_MOUSEMOVE,WM_LBUTTONDOWN,WM_RBUTTONDOWN})
 {
 	wavefile = make_unique<WaveFile>();
 
@@ -34,9 +35,11 @@ SceneController::SceneController(int w, int h):
 	waveoutSelect->Start();
 	renderSelect = make_unique<NSFRender>(SND_SELECT, wavefile->GetHeader(), 200);
 
-
+#ifdef _DEBUG
 	//GoCover(w,h);
-	GoMatch(w, h);
+	//GoMatch(w, h);
+	GoPrepRoom(w, h);
+#endif
 }
 
 SceneController::~SceneController()
@@ -66,7 +69,11 @@ void SceneController::GoCover(int w, int h)
 {
 	scene=make_unique<SceneCover>(this);
 	scene->Start(w, h);
+#ifdef _DEBUG
 	//PlayBGM();
+#else
+	PlayBGM();
+#endif
 }
 
 void SceneController::GoMatch(int w, int h)
@@ -81,6 +88,12 @@ void SceneController::GoMatch(int w, int h)
 		scene = make_unique<SceneMatch>(this,w,h);
 		scene->Start(w, h);
 	}
+}
+
+void SceneController::GoPrepRoom(int w, int h)
+{
+	scene = make_unique<ScenePrepRoom>(this, w, h);
+	scene->Start(w, h);
 }
 
 int SceneController::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)

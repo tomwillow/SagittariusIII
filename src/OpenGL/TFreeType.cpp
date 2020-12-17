@@ -171,9 +171,14 @@ void TFreeType::SetFontSizeScale(float i)
 	scale = i;
 }
 
+float TFreeType::GetFontSizeScale()
+{
+	return scale;
+}
+
 
 float TFreeType::GetClipCoordHeight(int H)
 {
 	float yscale = 2.0f / H;
-	return height_pixel * yscale * scale;
+	return pixel_size * yscale * scale;
 }

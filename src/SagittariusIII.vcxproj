@@ -126,14 +126,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;$(IncludePath)</IncludePath>
+    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;$(IncludePath)</IncludePath>
     <LibraryPath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\out;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>..\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='De_OpenGL|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;$(IncludePath)</IncludePath>
+    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;$(IncludePath)</IncludePath>
     <LibraryPath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\out;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>..\$(Configuration)\</IntDir>
@@ -141,14 +141,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\out;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;$(IncludePath)</IncludePath>
+    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>..\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Re_OpenGL|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\out;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;$(IncludePath)</IncludePath>
+    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>..\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -168,7 +168,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINXP;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -180,7 +180,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_OPENGL;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINXP;WIN32;_DEBUG;_OPENGL;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
@@ -195,7 +195,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_OPENGL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINXP;WIN32;NDEBUG;_OPENGL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -213,7 +213,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_OPENGL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINXP;WIN32;NDEBUG;_OPENGL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -283,16 +283,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Common\TIniFile.cpp" />
-    <ClCompile Include="GLNetworkDialog.cpp" />
+    <ClCompile Include="Dialog\GLNetworkDialog.cpp" />
+    <ClCompile Include="Dialog\GLUsernameDialog.cpp" />
+    <ClCompile Include="GameAI.cpp" />
+    <ClCompile Include="GLTeamButton.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Media\MyComplex.cpp" />
     <ClCompile Include="Media\WaveFile.cpp" />
+    <ClCompile Include="Network\MySocket.cpp" />
     <ClCompile Include="OpenGL\gl_assit.cpp" />
     <ClCompile Include="OpenGL\TBoxWithTex.cpp" />
     <ClCompile Include="OpenGL\TFreeType.cpp" />
     <ClCompile Include="OpenGL\TTexture.cpp" />
     <ClCompile Include="OpenGL\TVertexArray.cpp" />
+    <ClCompile Include="Scene\ScenePrepRoom.cpp" />
     <ClCompile Include="Scene\SceneMatch.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneController.cpp" />
@@ -310,28 +315,35 @@
     <ClCompile Include="OpenGL\TFixedSpirit.cpp" />
     <ClCompile Include="OpenGL\TFixedFreeType.cpp" />
     <ClCompile Include="GLControl\TGLButton.cpp" />
-    <ClCompile Include="Dialog\TGLDialog.cpp" />
+    <ClCompile Include="GLDialog\TGLDialog.cpp" />
     <ClCompile Include="GLControl\TGLEdit.cpp" />
-    <ClCompile Include="Dialog\TGLEditDialog.cpp" />
-    <ClCompile Include="Dialog\TGLMessageBox.cpp" />
+    <ClCompile Include="GLDialog\TGLEditDialog.cpp" />
+    <ClCompile Include="GLDialog\TGLMessageBox.cpp" />
+    <ClCompile Include="TGLColorCombo.cpp" />
     <ClCompile Include="TSmallWindow.cpp" />
     <ClCompile Include="Media\WaveOut.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColorConfig.h" />
     <ClInclude Include="Common\stb_image.h" />
     <ClInclude Include="Common\TIniFile.h" />
     <ClInclude Include="Common\tstring.h" />
     <ClInclude Include="ExternResource.h" />
-    <ClInclude Include="GLNetworkDialog.h" />
+    <ClInclude Include="Dialog\GLNetworkDialog.h" />
+    <ClInclude Include="Dialog\GLUsernameDialog.h" />
+    <ClInclude Include="GameAI.h" />
+    <ClInclude Include="GLTeamButton.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Media\MyComplex.h" />
     <ClInclude Include="Media\WaveFile.h" />
+    <ClInclude Include="Network\MySocket.h" />
     <ClInclude Include="OpenGL\TBoxWithTex.h" />
     <ClInclude Include="OpenGL\TFreeType.h" />
     <ClInclude Include="OpenGL\gl_assist.h" />
     <ClInclude Include="OpenGL\TTexture.h" />
     <ClInclude Include="OpenGL\TVertexArray.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Scene\ScenePrepRoom.h" />
     <ClInclude Include="Scene\SceneMatch.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneController.h" />
@@ -349,10 +361,11 @@
     <ClInclude Include="OpenGL\TFixedSpirit.h" />
     <ClInclude Include="OpenGL\TFixedFreeType.h" />
     <ClInclude Include="GLControl\TGLButton.h" />
-    <ClInclude Include="Dialog\TGLDialog.h" />
+    <ClInclude Include="GLDialog\TGLDialog.h" />
     <ClInclude Include="GLControl\TGLEdit.h" />
-    <ClInclude Include="Dialog\TGLEditDialog.h" />
-    <ClInclude Include="Dialog\TGLMessageBox.h" />
+    <ClInclude Include="GLDialog\TGLEditDialog.h" />
+    <ClInclude Include="GLDialog\TGLMessageBox.h" />
+    <ClInclude Include="TGLColorCombo.h" />
     <ClInclude Include="TSmallWindow.h" />
     <ClInclude Include="Media\WaveOut.h" />
   </ItemGroup>
