@@ -6,6 +6,7 @@
 
 #include "gl_assist.h"
 
+#include "StringConfig.h"
 #include "ColorConfig.h"
 
 using namespace std;
@@ -13,11 +14,11 @@ using namespace std;
 GLNetworkDialog::GLNetworkDialog(SceneController* in_controller) :
 	controller(in_controller),
 	TGLDialog(1.5f,1.5f),
-	text(make_unique<TBoxFreeType>(TEXT("搜索局域网房间："), FONT_CJK, text_pixel))
+	text(make_unique<TBoxFreeType>(controller->lang.GetValue(STR_SEARCH_ROOM), FONT_CJK, text_pixel))
 {
-	buttons.emplace_back(TEXT("IP直连"), FONT_CJK, text_pixel);
-	buttons.emplace_back(TEXT("创建房间"), FONT_CJK, text_pixel);
-	buttons.emplace_back(TEXT("取消"), FONT_CJK, text_pixel);
+	buttons.emplace_back(controller->lang.GetValue(STR_CONNECT_IP), FONT_CJK, text_pixel);
+	buttons.emplace_back(controller->lang.GetValue(STR_BUILD_ROOM), FONT_CJK, text_pixel);
+	buttons.emplace_back(controller->lang.GetValue(STR_CANCEL), FONT_CJK, text_pixel);
 }
 
 void GLNetworkDialog::Draw(int w, int h)
@@ -94,12 +95,15 @@ int GLNetworkDialog::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			controller->PlaySoundEffect();
 			tstring sip = ipDialog->GetValue();
 			//
-			if (CheckIP(wstring2string(sip)))
+			if (CheckIP(wstring2string(sip)))//ip正确，进行连接
 			{
-
+				//
+				controller->SetHost(false);
 			}
 			else
-				ipMsgBox= make_unique<TGLMessageBox>(TEXT("IP格式不正确。"), TEXT(""), MB_OK);
+			{
+				ipMsgBox = make_unique<TGLMessageBox>(&controller->lang,controller->lang.GetValue(STR_WRONG_IP), TEXT(""), MB_OK);
+			}
 		}
 		if (key == IDCANCEL)
 		{
@@ -122,21 +126,22 @@ int GLNetworkDialog::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		int key = 0;
 		key = buttons[0].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-		if (key)
+		if (key)//打开服务器ip对话框
 		{
 			controller->PlaySoundEffect();
-			ipDialog = make_unique<TGLEditDialog>(TEXT("请输入服务器IP："), TEXT(""), MB_OKCANCEL);
+			ipDialog = make_unique<TGLEditDialog>(&controller->lang,controller->lang.GetValue(STR_INPUT_SERVER_IP), TEXT(""), MB_OKCANCEL);
 		}
 
 		key = buttons[1].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-		if (key)
+		if (key)//开设房间
 		{
+			controller->SetHost(true);
 			controller->PlaySoundEffect();
 			return IDBUILDROOM;
 		}
 
 		key = buttons[2].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-		if (key)
+		if (key)//取消
 		{
 			controller->PlaySoundEffect();
 			return IDCANCEL;

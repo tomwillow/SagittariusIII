@@ -2,29 +2,33 @@
 
 #include "gl_assist.h"
 
+#include "TIniFile.h"
+
+#include "StringConfig.h"
+
 using namespace std;
 
-TGLMessageBox::TGLMessageBox(std::tstring text, std::tstring caption, unsigned int mb_code, float width, float height):
+TGLMessageBox::TGLMessageBox(TIniFile* lang, std::tstring text, std::tstring caption, unsigned int mb_code, float width, float height):
 	TGLDialog(width,height),s_content(text),s_caption(caption),mb_code(mb_code),
 	text(make_unique<TBoxFreeType>(s_content,FONT_CJK,text_pixel))
 {
 	if (mb_code & MB_OKCANCEL)
 	{
-		buttons.emplace_back(TEXT("确定"), FONT_CJK);
-		buttons.emplace_back(TEXT("取消"), FONT_CJK);
+		buttons.emplace_back(lang->GetValue(STR_OK), FONT_CJK);
+		buttons.emplace_back(lang->GetValue(STR_CANCEL), FONT_CJK);
 		return;
 	}
 	if (mb_code == MB_OK)
 	{
-		buttons.emplace_back(TEXT("确定"), FONT_CJK);
+		buttons.emplace_back(lang->GetValue(STR_OK), FONT_CJK);
 		return;
 	}
 
 	assert(0);
 }
 
-TGLMessageBox::TGLMessageBox(std::tstring text, std::tstring caption, unsigned int mb_code):
-	TGLMessageBox(text,caption,mb_code,0.8f,0.8f)
+TGLMessageBox::TGLMessageBox(TIniFile* lang, std::tstring text, std::tstring caption, unsigned int mb_code):
+	TGLMessageBox(lang,text,caption,mb_code,0.8f,0.8f)
 {
 }
 

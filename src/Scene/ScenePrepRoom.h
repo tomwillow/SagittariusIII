@@ -11,19 +11,22 @@
 struct Player
 {
     std::tstring name;
+    int ai;
     bool king;
-    glm::vec4 color;
+    int color;
     int team;
     std::unique_ptr<TBoxFreeType> freetype;
-    GLTeamButton team_btn;
-    Player(std::tstring in_name, glm::vec4 in_color, int in_team,bool in_king) :
-        name(in_name), color(in_color), team(in_team),king(in_king),
+    GLTeamButton team_btn; 
+    TGLColorCombo color_combo;
+    Player(std::tstring in_name, int in_color, int in_team,bool in_king,int in_ai) :
+        name(in_name), color(in_color), team(in_team),king(in_king),ai(in_ai),
         freetype(std::make_unique<TBoxFreeType>(in_name, FONT_CJK, 48)),
         team_btn(in_team,FONT_CJK,48)
     {
         freetype->SetFontSizeScale(0.5);
         team_btn.SetFontSizeScale(0.5);
        team_btn.SetEnable(false);
+       color_combo.SetCur(color);
     }
 };
 
@@ -40,13 +43,13 @@ private:
     const int text_pixel = 48;
     float text_height;
 
-    std::unique_ptr<TBoxFreeType> title,name,color,team,preinstall_title;
+    std::unique_ptr<TBoxFreeType> title,name,color,team,king,preinstall_title;
     std::vector<TGLButton> buttons,preinstall_buttons;
 
     std::vector<Player> players;
-    TGLColorCombo color_combo;
 
     void DrawPreinstall(float w, float h, float x1, float y1, float x2, float y2);
+    void DrawList(float w, float h, float x1, float y1, float x2, float y2);
 public:
     //新建一个StarRender
     ScenePrepRoom(SceneController* controller, int w, int h);

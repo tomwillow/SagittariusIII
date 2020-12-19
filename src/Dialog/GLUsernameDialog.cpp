@@ -2,11 +2,13 @@
 
 #include "SceneController.h"
 
+#include "StringConfig.h"
+
 using namespace std;
 
 GLUsernameDialog::GLUsernameDialog(SceneController* in_controller) :
 	controller(in_controller),
-    TGLEditDialog(TEXT("请输入用户名："), TEXT(""), MB_OKCANCEL)
+    TGLEditDialog(&in_controller->lang,in_controller->lang.GetValue(STR_INPUT_NAME), TEXT(""), MB_OKCANCEL)
 {
 }
 
@@ -31,12 +33,12 @@ int GLUsernameDialog::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		tstring username = this->TGLEditDialog::GetValue();
 		if (username.empty())
 		{
-			msgBox = make_unique<TGLMessageBox>(TEXT("用户名不正确。"), TEXT(""), MB_OK);
+			msgBox = make_unique<TGLMessageBox>(&controller->lang,controller->lang.GetValue(STR_WRONG_USERNAME), TEXT(""), MB_OK);
 			return 0;
 		}
 		if (username.find(TEXT(' ')) != tstring::npos)
 		{
-			msgBox = make_unique<TGLMessageBox>(TEXT("不能有空格。"), TEXT(""), MB_OK);
+			msgBox = make_unique<TGLMessageBox>(&controller->lang,controller->lang.GetValue(STR_DO_NOT_BLANK), TEXT(""), MB_OK);
 			return 0;
 		}
 

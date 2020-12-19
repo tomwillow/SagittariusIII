@@ -60,6 +60,8 @@ int SceneCover::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		hoverStart = textStart->PosInTexture(x, y, W, H);
 		hoverLoad = textLoad->PosInTexture(x, y, W, H);
 		hoverExit = textExit->PosInTexture(x, y, W, H);
+
+		starRender->SetViewPosByWindowCoord(W, H, x, y);
 		break;
 	}
 	}

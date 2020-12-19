@@ -105,7 +105,8 @@ TFreeType::TFreeType(std::tstring s, std::string font_name, int pixel_size):
 			texture,
 			glm::ivec2(w, h),
 			glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-			face->glyph->advance.x
+			face->glyph->advance.x,
+			c==TEXT('\n')
 		};
 		Characters.push_back(ch);
 

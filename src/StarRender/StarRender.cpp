@@ -31,7 +31,7 @@ void StarRender::AddPointStar(float t0)
 {
 	float x = RandFloat(), y = RandFloat();
 	float z = -RandFloat(1, 10000);
-	float vz = RandFloat(0, 10000);
+	float vz = RandFloat(0, 100000);
 
 	glm::vec3 p = ClipToWorld({ x,y }, z, projection);
 
@@ -100,6 +100,7 @@ StarRender::StarRender(int w, int h) :
 	e.seed(t0);
 
 	projection = glm::perspective(glm::radians(45.0f), (float)w / (float)h, 0.1f, 10000.0f);
+	view = glm::mat4(1.0f);
 	for (int i = 0; i < point_count; ++i)
 	{
 		AddPointStar(t0);
@@ -108,6 +109,18 @@ StarRender::StarRender(int w, int h) :
 	{
 		AddTexStar(t0);
 	}
+}
+
+void StarRender::SetViewPosByClipCoord(float x, float y)
+{
+	float scale = -100.0f;
+	view = glm::mat4(1.0f);
+	view = glm::translate(view, { x * scale, y * scale, 0.0f });
+}
+
+void StarRender::SetViewPosByWindowCoord(int w, int h, int x, int y)
+{
+	SetViewPosByClipCoord(ZeroOne2Clip((float)x / (float)w), ZeroOne2Clip(((float)h - (float)y) / (float)h));
 }
 
 void StarRender::Draw(int w, int h, float t)
@@ -123,7 +136,7 @@ void StarRender::Draw(int w, int h, float t)
 		star.RefreshPos(t);
 
 		glm::vec4 p(star.p, 1.0f);
-		p = projection * p;
+		p = projection*view * p;
 
 		float x = p.x, y = p.y, z = p.z, w = p.w;
 		bool show = x > -w && x<w&& y>-w && y<w&& z>-w && z < w;
@@ -163,7 +176,7 @@ void StarRender::Draw(int w, int h, float t)
 		star.RefreshPos(t);
 
 		glm::vec4 p(star.p, 1.0f);
-		p = projection * p;
+		p = projection*view * p;
 
 		float x = p.x, y = p.y, z = p.z, w = p.w;
 		bool show = x > -w && x<w&& y>-w && y<w&& z>-w && z < w;

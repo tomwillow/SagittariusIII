@@ -7,6 +7,7 @@
 #include "TGLButton.h"
 #include "TBoxFreeType.h"
 
+class TIniFile;
 class TGLMessageBox :
     public TGLDialog
 {
@@ -20,9 +21,9 @@ protected:
 	unsigned int mb_code;
 	std::unique_ptr<TBoxFreeType> text;
 	std::vector<TGLButton> buttons;
-	TGLMessageBox(std::tstring text, std::tstring caption, unsigned int mb_code,float width,float height);
+	TGLMessageBox(TIniFile *lang,std::tstring text, std::tstring caption, unsigned int mb_code,float width,float height);
 public:
-	TGLMessageBox(std::tstring text,std::tstring caption,unsigned int mb_code);
+	TGLMessageBox(TIniFile* lang, std::tstring text,std::tstring caption,unsigned int mb_code);
 	void Draw(int w, int h);
 
 	virtual int WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam);

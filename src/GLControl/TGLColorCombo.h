@@ -15,7 +15,8 @@ private:
 	bool spread;
 	int cur;
 	int hover;//-2 : none; -1 : self, 0 -> size-1 
-	std::vector<glm::vec4> colors;
+
+	float x_margin, y_margin;
 
 	void DrawColor(int index,float x1, float y1, float x2, float y2);
 
@@ -28,7 +29,10 @@ public:
 	virtual int OnRButtonDown(WPARAM mk_code, int x, int y);
 
 	virtual void DrawByClipCoord(int w, int h, float x1, float y1, float x2, float y2);
+	virtual void DrawSpreadByClipCoord(int w, int h);
 
 	glm::vec4 GetColor();
+	int GetCur();
+	void SetCur(int i);
 };
 

@@ -15,7 +15,7 @@ class StarRender
 private:
     const int point_count;
     const int tex_count;
-    glm::mat4 projection;
+    glm::mat4 projection,view;
     std::vector<TTexture> textures;//恒星贴图
     std::vector<TTexture> tex_sos;//sos徽标贴图
     std::vector<Star> point_stars;//点恒星
@@ -24,6 +24,9 @@ private:
     void AddTexStar(float t0);
 public:
     StarRender(int w, int h);
+
+    void SetViewPosByClipCoord(float x, float y);
+    void SetViewPosByWindowCoord(int w,int h,int x, int y);
 
     //渲染过程全部使用裁剪空间坐标，调用前需确保投影矩阵和模型矩阵均为单位矩阵
     void Draw(int w, int h,float t);

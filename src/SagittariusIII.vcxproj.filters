@@ -51,18 +51,6 @@
     <ClCompile Include="Media\WaveOut.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\Scene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\SceneController.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\SceneCover.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\SceneIntro.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="OpenGL\TFixedSpirit.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -70,9 +58,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="OpenGL\TFixedFreeType.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\SceneMatch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="OpenGL\TBoxWithTex.cpp">
@@ -123,16 +108,37 @@
     <ClCompile Include="Network\MySocket.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\ScenePrepRoom.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="GLTeamButton.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TGLColorCombo.cpp">
+    <ClCompile Include="ColorConfig.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="GameAI.cpp">
+    <ClCompile Include="GLControl\TGLColorCombo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneCover.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneIntro.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneMatch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\ScenePrepRoom.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneYukiDispr.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AI\GameAI.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,18 +185,6 @@
     <ClInclude Include="Media\WaveOut.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\Scene.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\SceneController.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\SceneCover.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\SceneIntro.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -201,9 +195,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="OpenGL\TFixedFreeType.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\SceneMatch.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="OpenGL\TBoxWithTex.h">
@@ -257,16 +248,37 @@
     <ClInclude Include="ColorConfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\ScenePrepRoom.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="GLTeamButton.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TGLColorCombo.h">
+    <ClInclude Include="StringConfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="GameAI.h">
+    <ClInclude Include="GLControl\TGLColorCombo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneCover.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneIntro.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneMatch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ScenePrepRoom.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneYukiDispr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AI\GameAI.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

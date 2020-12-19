@@ -53,6 +53,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x86</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -183,6 +184,7 @@
       <PreprocessorDefinitions>WINXP;WIN32;_DEBUG;_OPENGL;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <ExceptionHandling>Async</ExceptionHandling>
+      <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -282,10 +284,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ColorConfig.cpp" />
     <ClCompile Include="Common\TIniFile.cpp" />
     <ClCompile Include="Dialog\GLNetworkDialog.cpp" />
     <ClCompile Include="Dialog\GLUsernameDialog.cpp" />
-    <ClCompile Include="GameAI.cpp" />
+    <ClCompile Include="AI\GameAI.cpp" />
     <ClCompile Include="GLTeamButton.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
@@ -297,6 +300,7 @@
     <ClCompile Include="OpenGL\TFreeType.cpp" />
     <ClCompile Include="OpenGL\TTexture.cpp" />
     <ClCompile Include="OpenGL\TVertexArray.cpp" />
+    <ClCompile Include="Scene\SceneYukiDispr.cpp" />
     <ClCompile Include="Scene\ScenePrepRoom.cpp" />
     <ClCompile Include="Scene\SceneMatch.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
@@ -319,7 +323,7 @@
     <ClCompile Include="GLControl\TGLEdit.cpp" />
     <ClCompile Include="GLDialog\TGLEditDialog.cpp" />
     <ClCompile Include="GLDialog\TGLMessageBox.cpp" />
-    <ClCompile Include="TGLColorCombo.cpp" />
+    <ClCompile Include="GLControl\TGLColorCombo.cpp" />
     <ClCompile Include="TSmallWindow.cpp" />
     <ClCompile Include="Media\WaveOut.cpp" />
   </ItemGroup>
@@ -331,7 +335,7 @@
     <ClInclude Include="ExternResource.h" />
     <ClInclude Include="Dialog\GLNetworkDialog.h" />
     <ClInclude Include="Dialog\GLUsernameDialog.h" />
-    <ClInclude Include="GameAI.h" />
+    <ClInclude Include="AI\GameAI.h" />
     <ClInclude Include="GLTeamButton.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Media\MyComplex.h" />
@@ -343,6 +347,7 @@
     <ClInclude Include="OpenGL\TTexture.h" />
     <ClInclude Include="OpenGL\TVertexArray.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Scene\SceneYukiDispr.h" />
     <ClInclude Include="Scene\ScenePrepRoom.h" />
     <ClInclude Include="Scene\SceneMatch.h" />
     <ClInclude Include="Scene\Scene.h" />
@@ -353,6 +358,7 @@
     <ClInclude Include="StarRender\Star.h" />
     <ClInclude Include="StarRender\StarRender.h" />
     <ClInclude Include="OpenGL\TBoxFreeType.h" />
+    <ClInclude Include="StringConfig.h" />
     <ClInclude Include="TControl\TButton.h" />
     <ClInclude Include="TControl\TControl.h" />
     <ClInclude Include="TControl\ControlStyle.h" />
@@ -365,7 +371,7 @@
     <ClInclude Include="GLControl\TGLEdit.h" />
     <ClInclude Include="GLDialog\TGLEditDialog.h" />
     <ClInclude Include="GLDialog\TGLMessageBox.h" />
-    <ClInclude Include="TGLColorCombo.h" />
+    <ClInclude Include="GLControl\TGLColorCombo.h" />
     <ClInclude Include="TSmallWindow.h" />
     <ClInclude Include="Media\WaveOut.h" />
   </ItemGroup>

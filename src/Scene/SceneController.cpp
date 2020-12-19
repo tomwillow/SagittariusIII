@@ -4,6 +4,7 @@
 #include "SceneCover.h"
 #include "SceneMatch.h"
 #include "ScenePrepRoom.h"
+#include "SceneYukiDispr.h"
 
 using namespace std;
 
@@ -21,8 +22,12 @@ SceneController::SceneController(int w, int h):
 	scene(make_unique<SceneIntro>(this)),
 	ini(TEXT("config.ini")),
 	stopBGM(true),
-	receivedMsg({WM_KEYDOWN,WM_CHAR,WM_MOUSEMOVE,WM_LBUTTONDOWN,WM_RBUTTONDOWN})
+	isHost(false),
+	receivedMsg({WM_KEYDOWN,WM_CHAR,WM_MOUSEMOVE,WM_LBUTTONDOWN,WM_RBUTTONDOWN}),
+	lang(ini.GetValue(TEXT("language")))
 {
+	//
+
 	wavefile = make_unique<WaveFile>();
 
 	//
@@ -35,9 +40,12 @@ SceneController::SceneController(int w, int h):
 	waveoutSelect->Start();
 	renderSelect = make_unique<NSFRender>(SND_SELECT, wavefile->GetHeader(), 200);
 
+	GoYukiDispr(w,h);//不符合条件会自动跳转至Intro
 #ifdef _DEBUG
-	//GoCover(w,h);
+
 	//GoMatch(w, h);
+
+	//SetHost(true);
 	GoPrepRoom(w, h);
 #endif
 }
@@ -63,6 +71,28 @@ void SceneController::PlaySoundEffect()
 	renderSelect->Reset();
 	renderSelect->Render();
 	waveoutSelect->PlayAudio(renderSelect->buf, renderSelect->buf_size);
+}
+
+void SceneController::SetHost(bool is_host)
+{
+	isHost = is_host;
+}
+
+bool SceneController::IsHost()
+{
+	return isHost;
+}
+
+void SceneController::GoIntro(int w, int h)
+{
+	scene = make_unique<SceneIntro>(this);
+	scene->Start(w, h);
+}
+
+void SceneController::GoYukiDispr(int w, int h)
+{
+	scene = make_unique<SceneYukiDispr>(this);
+	scene->Start(w, h);
 }
 
 void SceneController::GoCover(int w, int h)

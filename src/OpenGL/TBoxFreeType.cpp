@@ -26,6 +26,18 @@ void TBoxFreeType::DrawByClipCoord(int w, int h, float x1, float y1, float x2, f
 	// 对文本中的所有字符迭代
 	for (auto& ch : Characters)
 	{
+		if (ch.IsReturn || (x + x_size * scale > x2))
+		{
+			x = x1;
+			y -= y_size * scale;
+			if (ch.IsReturn)
+			{
+				continue;
+			}
+		}
+		if (y < y1)
+			break;
+
 		GLfloat xpos = x + ch.Bearing.x * xscale*scale;
 		GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * yscale * scale;
 
@@ -54,14 +66,6 @@ void TBoxFreeType::DrawByClipCoord(int w, int h, float x1, float y1, float x2, f
 
 		// 更新位置到下一个字形的原点，注意单位是1/64像素
 		x += (ch.Advance >> 6) * xscale * scale; //(2^6 = 64)
-
-		if (x + x_size * scale > x2)
-		{
-			x = x1;
-			y -= y_size * scale;
-		}
-		if (y < y1)
-			break;
 	}
 }
 

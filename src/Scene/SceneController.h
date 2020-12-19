@@ -21,6 +21,7 @@ class Scene;
 class SceneController
 {
 private:
+	bool isHost;
 	std::unique_ptr<Scene> scene;
 
 	bool stopBGM;
@@ -31,10 +32,13 @@ private:
 	void PlayBGMThread();
 public:
 	TIniFile ini;
+	TIniFile lang;
 
 	SceneController(int w, int h);
 	~SceneController();
 
+	void GoIntro(int w, int h);
+	void GoYukiDispr(int w, int h);
 	void GoCover(int w, int h);
 	void GoMatch(int w, int h);
 	void GoPrepRoom(int w, int h);
@@ -46,5 +50,8 @@ public:
 
 	void PlayBGM();
 	void PlaySoundEffect();
+
+	void SetHost(bool is_host);
+	bool IsHost();
 };
 

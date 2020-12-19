@@ -4,8 +4,8 @@
 
 using namespace std;
 
-TGLEditDialog::TGLEditDialog(std::tstring text, std::tstring caption, unsigned int mb_code):
-	TGLMessageBox(text,caption,mb_code,1.0f,1.0f),edit(make_unique<TGLEdit>(TEXT(""),FONT_CJK))
+TGLEditDialog::TGLEditDialog(TIniFile* lang, std::tstring text, std::tstring caption, unsigned int mb_code):
+	TGLMessageBox(lang,text,caption,mb_code,1.0f,1.0f),edit(make_unique<TGLEdit>(TEXT(""),FONT_CJK))
 {
 }
 

@@ -10,7 +10,7 @@ class TGLEditDialog :
 private:
 	std::unique_ptr<TGLEdit> edit;
 public:
-	TGLEditDialog(std::tstring text, std::tstring caption, unsigned int mb_code);
+	TGLEditDialog(TIniFile *lang,std::tstring text, std::tstring caption, unsigned int mb_code);
 
 	virtual int WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 

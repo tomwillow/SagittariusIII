@@ -14,9 +14,9 @@ TIniFile::TIniFile(std::tstring filename) throw (runtime_error) :filename(filena
 	if (ifs.fail())//没权限或不存在
 	{
 		//创建空白ini文件
-		ofstream ofs(filename);
+		tofstream ofs(filename);
 		if (ofs.fail())
-			throw runtime_error("Can't not write " + to_string(filename));
+			throw runtime_error("Can't not read ini file: " + to_string(filename));
 		ofs.close();
 	}
 	else

@@ -30,6 +30,12 @@ SceneMatch::SceneMatch(SceneController* controller, std::unique_ptr<StarRender>&
 
 int SceneMatch::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	if (uMsg == WM_MOUSEMOVE)
+	{
+		int x = GET_X_LPARAM(lParam), y = GET_Y_LPARAM(lParam);
+	starRender->SetViewPosByWindowCoord(W, H, x, y);
+	}
+
 	if (usernameDialog)
 	{
 		int key = usernameDialog->WndProc(uMsg, wParam, lParam);
@@ -44,7 +50,6 @@ int SceneMatch::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		if (key == IDCANCEL)
 		{
-		//controller->PlaySoundEffect();
 		controller->GoCover(W, H);
 		}
 		return 0;
@@ -53,15 +58,13 @@ int SceneMatch::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	if (searchDialog)
 	{
 		int key=searchDialog->WndProc(uMsg, wParam, lParam);
-		if (key == IDBUILDROOM)
+		if (key == IDBUILDROOM)//开设房间
 		{
-			//controller->PlaySoundEffect();
 			controller->GoPrepRoom(W, H);
 			return 0;
 		}
 		if (key == IDCANCEL)
 		{
-			//controller->PlaySoundEffect();
 			controller->GoCover(W, H);
 			return 0;
 		}

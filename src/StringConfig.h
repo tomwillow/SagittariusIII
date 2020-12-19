@@ -1,0 +1,18 @@
+#pragma once
+
+#define STR_SEARCH_ROOM	 TEXT("search_room")
+#define STR_CONNECT_IP	 TEXT("connect_ip")
+#define STR_BUILD_ROOM	 TEXT("build_room")
+#define STR_OK		 TEXT("ok")
+#define STR_CANCEL		 TEXT("cancel")
+#define STR_WRONG_IP	 TEXT("wrong_ip")
+#define STR_INPUT_SERVER_IP	 TEXT("input_server_ip")
+#define STR_PREP_ROOM_TITLE	 TEXT("prep_room_title")
+#define STR_NAME	 TEXT("name")
+#define STR_FLAGSHIP	 TEXT("flagship")
+#define STR_COLOR	 TEXT("color")
+#define STR_TEAM	 TEXT("team")
+#define STR_START_GAME	 TEXT("start_game")
+#define STR_INPUT_NAME	 TEXT("input_name")
+#define STR_WRONG_USERNAME	 TEXT("wrong_username")
+#define STR_DO_NOT_BLANK TEXT("do_not_blank")

@@ -15,6 +15,7 @@ struct Character {
 	glm::ivec2 Size;       // 字形大小
 	glm::ivec2 Bearing;    // 字形基于基线和起点的位置
 	GLuint     Advance;    // 起点到下一个字形起点的距离，单位1/64像素
+	bool IsReturn;
 };
 
 //DrawByPixel 渲染方法
