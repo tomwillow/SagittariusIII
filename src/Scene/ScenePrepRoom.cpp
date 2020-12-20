@@ -73,21 +73,27 @@ int ScenePrepRoom::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		int key = 0;
 		for (auto& player : players)
+		{
+			//点击了颜色条
 			if (player.color_combo.OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)))
 			{
 				controller->PlaySoundEffect();
 				player.color = player.color_combo.GetCur();
+				return 0;
 				break;
 			}
 
-		for (auto& player : players)
-		{
+			//点击了组队按钮
 			if (player.team_btn.OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)))
 			{
 				controller->PlaySoundEffect();
 				player.team = player.team_btn.GetTeam();
+				return 0;
+				break;
 			}
+
 		}
+
 
 		key = preinstall_buttons[0].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 		if (key)//战役1
@@ -116,12 +122,17 @@ int ScenePrepRoom::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 					player.team_btn.SetEnable(true);
 				}
 			}
+			return 0;
 		}
-		//key = buttons[0].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));//开始游戏
-		//if (key)
-		//{
-		//	ipDialog = make_unique<TGLEditDialog>(TEXT("请输入服务器IP："), TEXT(""), MB_OKCANCEL);
-		//}
+
+		//点击开始游戏
+		key = buttons[0].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+		if (key)
+		{
+			controller->PlaySoundEffect();
+			controller->GoGame(W, H);
+			return 0;
+		}
 
 		key = buttons[1].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));//取消
 		if (key)

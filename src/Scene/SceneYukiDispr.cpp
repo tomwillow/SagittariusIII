@@ -39,6 +39,8 @@ bool SceneYukiDispr::ShouldShow()
     {
         last_remind = 0;
     }
+
+    //若上一次没有进行过确认，或上一次确认已经是去年及以前
     return year>last_remind;
 }
 
@@ -99,23 +101,23 @@ void SceneYukiDispr::Render(int W, int H)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//清屏。这里清掉颜色缓冲区与深度缓冲区
 
 
-    if (yuki_showing)
+    if (yuki_showing)//有待显示的内容
     {
         static int count = 0;
-        if (t-last_t > 0.1f)
+        if (t-last_t > 0.1f)//达到字符跳跃时机
         {
 
             count++;
 
-            text = make_unique<TBoxFreeType>(yuki_showing->s.substr(0, count), FONT_CJK, 24);
+            text = make_unique<TBoxFreeType>(yuki_showing->s.substr(0, count), FONT_CJK, 24);//增加字符
 
-            if (count > yuki_showing->s.size())
+            if (count > yuki_showing->s.size())//已显示完本行
             {
-                //
+                //送入永久显示区
                 old_msg.push_back({ yuki_showing->has_prefix,yuki_showing->s });
                 text = nullptr;
 
-                //
+                //清空待显示字符
                 count = 0;
                 yuki_showing = nullptr;
 
@@ -125,8 +127,9 @@ void SceneYukiDispr::Render(int W, int H)
     }
     else
     {
-        if (!q.empty())
+        if (!q.empty())//还有待显示内容
         {
+            //取出1行并pop
             yuki_showing = make_unique<YukiMsg>(q.front().has_prefix,q.front().s);
             q.pop();
         }
@@ -136,19 +139,21 @@ void SceneYukiDispr::Render(int W, int H)
 
     //total line = 26
     float pixel = 24;
-    float total_line = 26+2;
+    float total_line = 26+2;//屏幕总行数+2
     float want_height = 2.0f / total_line;
-    float char_width = pixel * 2.0f / W;
-    float prefix_width = char_width * 7;
+    float char_width = pixel * 2.0f / W;//单个字符的裁剪坐标宽度
+    float prefix_width = char_width * 7;//前缀宽度
 
     EnableTexture();
-    float coe = want_height / (pixel*2.0f / H);
+    float coe = want_height / (pixel*2.0f / H);//字符大小调整系数，通过乘以系数使屏幕显示固定行数
     float h = want_height;
 
     float x1 = -1.0f;
     float x2 = 1.0f;
     float y2 = 1.0f;
     float y1 = y2 - h;
+
+    //永久显示部分
     for (auto& msg : old_msg)
     {
         if (msg.has_prefix)
@@ -162,6 +167,7 @@ void SceneYukiDispr::Render(int W, int H)
         y1 -= h;
     }
 
+    //逐字显示部分
     if (text)
     {
         if (yuki_showing->has_prefix)

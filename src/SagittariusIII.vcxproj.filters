@@ -108,9 +108,6 @@
     <ClCompile Include="Network\MySocket.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="GLTeamButton.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="ColorConfig.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -139,6 +136,30 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="AI\GameAI.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneGame.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLWindow\GLMap.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLWindow\GLWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLControl\GLTeamButton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLWindow\GLWndCommand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLWindow\GLWndCondition.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLWindow\GLWndLocation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GLWindow\GLWndStatus.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -248,9 +269,6 @@
     <ClInclude Include="ColorConfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="GLTeamButton.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="StringConfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -279,6 +297,30 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="AI\GameAI.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneGame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLWindow\GLMap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLWindow\GLWindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLControl\GLTeamButton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLWindow\GLWndStatus.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLWindow\GLWndCommand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLWindow\GLWndCondition.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GLWindow\GLWndLocation.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

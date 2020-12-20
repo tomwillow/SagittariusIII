@@ -21,3 +21,12 @@
 #define SND_SELECT "sound/effect_select.nsf"
 
 #define IMG_DIALOG_BG "textures/dialog.png"
+
+#define IMG_WINDOW_01 "textures/window/1.png"
+#define IMG_WINDOW_02 "textures/window/2.png"
+#define IMG_WINDOW_03 "textures/window/3.png"
+#define IMG_WINDOW_04 "textures/window/4.png"
+#define IMG_WINDOW_05 "textures/window/5.png"
+#define IMG_WINDOW_06 "textures/window/6.png"
+#define IMG_WINDOW_07 "textures/window/7.png"
+#define IMG_WINDOW_08 "textures/window/8.png"

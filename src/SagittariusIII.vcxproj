@@ -127,14 +127,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;$(IncludePath)</IncludePath>
+    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;GLWindow;$(IncludePath)</IncludePath>
     <LibraryPath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\out;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>..\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='De_OpenGL|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;$(IncludePath)</IncludePath>
+    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;GLWindow;$(IncludePath)</IncludePath>
     <LibraryPath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\out;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>..\$(Configuration)\</IntDir>
@@ -142,14 +142,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\out;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;$(IncludePath)</IncludePath>
+    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;GLWindow;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>..\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Re_OpenGL|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\out;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;$(IncludePath)</IncludePath>
+    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;GLWindow;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>..\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -289,7 +289,13 @@
     <ClCompile Include="Dialog\GLNetworkDialog.cpp" />
     <ClCompile Include="Dialog\GLUsernameDialog.cpp" />
     <ClCompile Include="AI\GameAI.cpp" />
-    <ClCompile Include="GLTeamButton.cpp" />
+    <ClCompile Include="GLWindow\GLMap.cpp" />
+    <ClCompile Include="GLControl\GLTeamButton.cpp" />
+    <ClCompile Include="GLWindow\GLWindow.cpp" />
+    <ClCompile Include="GLWindow\GLWndCommand.cpp" />
+    <ClCompile Include="GLWindow\GLWndCondition.cpp" />
+    <ClCompile Include="GLWindow\GLWndLocation.cpp" />
+    <ClCompile Include="GLWindow\GLWndStatus.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Media\MyComplex.cpp" />
@@ -300,6 +306,7 @@
     <ClCompile Include="OpenGL\TFreeType.cpp" />
     <ClCompile Include="OpenGL\TTexture.cpp" />
     <ClCompile Include="OpenGL\TVertexArray.cpp" />
+    <ClCompile Include="Scene\SceneGame.cpp" />
     <ClCompile Include="Scene\SceneYukiDispr.cpp" />
     <ClCompile Include="Scene\ScenePrepRoom.cpp" />
     <ClCompile Include="Scene\SceneMatch.cpp" />
@@ -336,7 +343,13 @@
     <ClInclude Include="Dialog\GLNetworkDialog.h" />
     <ClInclude Include="Dialog\GLUsernameDialog.h" />
     <ClInclude Include="AI\GameAI.h" />
-    <ClInclude Include="GLTeamButton.h" />
+    <ClInclude Include="GLWindow\GLMap.h" />
+    <ClInclude Include="GLControl\GLTeamButton.h" />
+    <ClInclude Include="GLWindow\GLWindow.h" />
+    <ClInclude Include="GLWindow\GLWndCommand.h" />
+    <ClInclude Include="GLWindow\GLWndCondition.h" />
+    <ClInclude Include="GLWindow\GLWndLocation.h" />
+    <ClInclude Include="GLWindow\GLWndStatus.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Media\MyComplex.h" />
     <ClInclude Include="Media\WaveFile.h" />
@@ -347,6 +360,7 @@
     <ClInclude Include="OpenGL\TTexture.h" />
     <ClInclude Include="OpenGL\TVertexArray.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Scene\SceneGame.h" />
     <ClInclude Include="Scene\SceneYukiDispr.h" />
     <ClInclude Include="Scene\ScenePrepRoom.h" />
     <ClInclude Include="Scene\SceneMatch.h" />

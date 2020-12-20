@@ -183,3 +183,8 @@ float TFreeType::GetClipCoordHeight(int H)
 	float yscale = 2.0f / H;
 	return pixel_size * yscale * scale;
 }
+
+int TFreeType::GetWidthPixel()
+{
+	return width_pixel*scale;
+}

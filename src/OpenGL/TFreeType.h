@@ -55,5 +55,7 @@ public:
 	void SetFontSizeScale(float i = 1.0f);
 	float GetFontSizeScale();
 	float GetClipCoordHeight(int H);
+
+	int GetWidthPixel();
 };
 

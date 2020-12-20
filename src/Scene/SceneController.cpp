@@ -5,6 +5,7 @@
 #include "SceneMatch.h"
 #include "ScenePrepRoom.h"
 #include "SceneYukiDispr.h"
+#include "SceneGame.h"
 
 using namespace std;
 
@@ -46,6 +47,8 @@ SceneController::SceneController(int w, int h):
 	//GoMatch(w, h);
 
 	//SetHost(true);
+
+	SetHost(true);
 	GoPrepRoom(w, h);
 #endif
 }
@@ -123,6 +126,12 @@ void SceneController::GoMatch(int w, int h)
 void SceneController::GoPrepRoom(int w, int h)
 {
 	scene = make_unique<ScenePrepRoom>(this, w, h);
+	scene->Start(w, h);
+}
+
+void SceneController::GoGame(int w, int h)
+{
+	scene = make_unique<SceneGame>(this);
 	scene->Start(w, h);
 }
 

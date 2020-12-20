@@ -44,6 +44,16 @@ inline void DrawCircle(float x, float y, float r)
 	glEnd();
 }
 
+inline void DrawRect(GLenum mode, glm::vec4 v)
+{
+	glBegin(mode);
+	glVertex2f(v[0], v[1]);
+	glVertex2f(v[2], v[1]);
+	glVertex2f(v[2], v[3]);
+	glVertex2f(v[0], v[3]);
+	glEnd();
+}
+
 inline void DrawRect(GLenum mode,float x1, float y1, float x2, float y2)
 {
 	glBegin(mode);
