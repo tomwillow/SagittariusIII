@@ -9,37 +9,19 @@
 
 using namespace std;
 
-void SceneController::PlayBGMThread()
-{
-	stopBGM = false;
-	while (!stopBGM)
-	{
-		renderBGM->Render();
-		waveoutBGM->PlayAudio(renderBGM->buf, renderBGM->buf_size);
-	}
-}
-
 SceneController::SceneController(int w, int h):
 	scene(make_unique<SceneIntro>(this)),
 	ini(TEXT("config.ini")),
-	stopBGM(true),
 	isHost(false),
-	receivedMsg({WM_KEYDOWN,WM_CHAR,WM_MOUSEMOVE,WM_LBUTTONDOWN,WM_RBUTTONDOWN}),
+	receivedMsg(
+		{WM_KEYDOWN,WM_KEYUP,
+		WM_CHAR,WM_MOUSEMOVE,
+		WM_LBUTTONDOWN,WM_LBUTTONUP,
+		WM_RBUTTONDOWN,
+		WM_SIZE,
+		WM_KILLFOCUS}),
 	lang(ini.GetValue(TEXT("language")))
 {
-	//
-
-	wavefile = make_unique<WaveFile>();
-
-	//
-	waveoutBGM = make_unique<WaveOut>(wavefile->GetHeader());
-	waveoutBGM->Start();
-	renderBGM = make_unique<NSFRender>(SND_TITLE, wavefile->GetHeader());
-
-	//
-	waveoutSelect = make_unique<WaveOut>(wavefile->GetHeader(), 200);
-	waveoutSelect->Start();
-	renderSelect = make_unique<NSFRender>(SND_SELECT, wavefile->GetHeader(), 200);
 
 	GoYukiDispr(w,h);//不符合条件会自动跳转至Intro
 #ifdef _DEBUG
@@ -55,9 +37,6 @@ SceneController::SceneController(int w, int h):
 
 SceneController::~SceneController()
 {
-	stopBGM = true;
-	if (t.joinable())
-		t.join();
 
 	ini.SaveToFile();
 }
@@ -65,15 +44,12 @@ SceneController::~SceneController()
 
 void SceneController::PlayBGM()
 {
-	if (!t.joinable())
-		t = thread(&SceneController::PlayBGMThread, this);
+	soundManager.PlayBGM();
 }
 
 void SceneController::PlaySoundEffect()
 {
-	renderSelect->Reset();
-	renderSelect->Render();
-	waveoutSelect->PlayAudio(renderSelect->buf, renderSelect->buf_size);
+	soundManager.PlaySoundEffect();
 }
 
 void SceneController::SetHost(bool is_host)

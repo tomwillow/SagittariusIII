@@ -2,6 +2,10 @@
 #include "Scene.h"
 
 #include "GLMap.h"
+#include "GLWndStatus.h"
+#include "GLWndCondition.h"
+#include "GLWndCommand.h"
+#include "GLWndLocation.h"
 
 #include <glm/matrix.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -39,15 +43,19 @@ private:
     //glm::fvec4 map_p,status_p,condition_p,command_p,location_p;
 
     GLMap wnd_map;
-    GLWindow wnd_status;
-    GLWindow wnd_condition;
-    GLWindow wnd_command;
-    GLWindow wnd_location;
+    GLWndStatus wnd_status;
+    GLWndCondition wnd_condition;
+    GLWndCommand wnd_command;
+    GLWndLocation wnd_location;
+    bool vk_codes[256];
     void Calc();
     void SetWndPos();
     void SetWndSize();
+
+    int state;//玩家状态： -1倒车 0静止 1前进
 public:
     SceneGame(SceneController* controller);
+    ~SceneGame();
     void Start(int W, int H)override;
     void Render(int W, int H)override;
 

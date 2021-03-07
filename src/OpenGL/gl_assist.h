@@ -106,3 +106,40 @@ inline void EnableGeometry()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
+
+inline void StartDrawMaskLayer()
+{
+	glClear(GL_STENCIL_BUFFER_BIT);
+	glColorMask(0, 0, 0, 0);
+	glEnable(GL_STENCIL_TEST);
+	glStencilFunc(GL_ALWAYS, 1, 1);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+}
+
+inline void StartDrawMaskedLayer()
+{
+	glColorMask(1, 1, 1, 1);
+	glStencilFunc(GL_EQUAL, 1, 1);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+}
+
+inline void EndMask()
+{
+	glDisable(GL_STENCIL_TEST);
+}
+
+inline void StartDrawMaskLayer2()
+{
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ZERO);//GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA
+}
+
+inline void StartDrawMaskedLayer2()
+{
+	glBlendFunc(GL_DST_ALPHA, GL_ZERO);//GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA
+}
+
+inline void EndMask2()
+{
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}

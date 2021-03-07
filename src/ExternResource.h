@@ -30,3 +30,5 @@
 #define IMG_WINDOW_06 "textures/window/6.png"
 #define IMG_WINDOW_07 "textures/window/7.png"
 #define IMG_WINDOW_08 "textures/window/8.png"
+
+#define IMG_SHIP "textures/ship.png"

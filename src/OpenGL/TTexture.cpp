@@ -69,3 +69,10 @@ void TTexture::DrawByClipCoord(float x1, float y1, float x2, float y2)
 	glEnd();
 }
 
+void TTexture::DrawCenterByPixel(float cx, float cy,float scale)
+{
+	float x1 = cx - width / 2.0f*scale, x2 = cx + width / 2.0f * scale;
+	float y1 = cy - height / 2.0f * scale, y2 = cy + width / 2.0f * scale;
+	DrawByClipCoord(x1, y1, x2, y2);
+}
+

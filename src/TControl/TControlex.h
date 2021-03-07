@@ -24,10 +24,6 @@ public:
 	TControl(const TControl& control);
 	TControl& operator=(const TControl& control);
 
-	int GetID();
-
-	void LinkControl(HWND hWndCtrl);
-	void LinkControl(HWND hDlg, int id);
 
 	//调用时将取得当前margin存储
 	//fixedMargin: left, top, right, bottom

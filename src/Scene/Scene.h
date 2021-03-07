@@ -10,7 +10,6 @@ class Scene
 {
 public:
 	Scene(SceneController* controller) :controller(controller) {}
-	virtual ~Scene() {}
 	virtual void Start(int w,int h) {}
 
 	virtual int WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam) { return 0; }

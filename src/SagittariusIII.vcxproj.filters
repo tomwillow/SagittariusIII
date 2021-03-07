@@ -162,6 +162,15 @@
     <ClCompile Include="GLWindow\GLWndStatus.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Media\WaveOutEffect.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\tstring.h">
@@ -321,6 +330,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="GLWindow\GLWndLocation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Media\WaveOutEffect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

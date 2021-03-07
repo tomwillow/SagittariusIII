@@ -20,13 +20,13 @@ ScenePrepRoom::ScenePrepRoom(SceneController* controller, int w, int h) :
 {
 	starRender = make_unique<StarRender>(w, h);
 
-	//
+	//底部按钮
 	buttons.emplace_back(controller->lang.GetValue(STR_START_GAME), FONT_CJK, text_pixel);
 	buttons.emplace_back(controller->lang.GetValue(STR_CANCEL), FONT_CJK, text_pixel);
 
-	//
-	players.emplace_back(controller->ini.GetValue(TEXT("username")), 0, 0, true, 0);
-	players[0].team_btn.SetEnable();
+	//添加玩家
+	controller->players.emplace_back(controller->ini.GetValue(TEXT("username")), 0, 0, true, 0);
+	controller->players[0].team_btn.SetEnable();
 
 	//
 	king->SetFontSizeScale(0.5f);
@@ -56,12 +56,16 @@ int ScenePrepRoom::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		int x = GET_X_LPARAM(lParam), y = GET_Y_LPARAM(lParam);
 		starRender->SetViewPosByWindowCoord(W, H, x, y);
 
+		//预设战役
 		for (auto& btn : preinstall_buttons)
 			btn.OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+
+		//底部按钮
 		for (auto& btn : buttons)
 			btn.OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 
-		for (auto& player : players)
+		//玩家
+		for (auto& player : controller->players)
 		{
 			player.team_btn.OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 			player.color_combo.OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
@@ -72,7 +76,9 @@ int ScenePrepRoom::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_LBUTTONDOWN:
 	{
 		int key = 0;
-		for (auto& player : players)
+
+		//玩家
+		for (auto& player : controller->players)
 		{
 			//点击了颜色条
 			if (player.color_combo.OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)))
@@ -94,30 +100,32 @@ int ScenePrepRoom::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		}
 
-
+		//预设战役
 		key = preinstall_buttons[0].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 		if (key)//战役1
 		{
 			controller->PlaySoundEffect();
 
-			players.clear();
-			players.emplace_back(TEXT("キョン艦隊"), COLOR_KYON, 1, false, 0);
-			players.emplace_back(TEXT("ハルヒ☆閣下☆艦隊"), COLOR_HARUHI, 1, true, 1);
-			players.emplace_back(TEXT("古泉くん艦隊"), COLOR_KOIZUMI, 1, false, 2);
-			players.emplace_back(TEXT("みくるちゃん艦隊"), COLOR_MIKURU, 1, false, 3);
-			players.emplace_back(TEXT("ユキ艦隊"), COLOR_YUKI, 1, false, 4);
-			players.emplace_back(TEXT("DIE"), COLOR_DIE, 2, true, 5);
-			players.emplace_back(TEXT("LUP"), COLOR_LUP, 2, false, 5); //red
-			players.emplace_back(TEXT("IRA"), COLOR_IRA, 2, false, 5);//yellow
-			players.emplace_back(TEXT("MUS"), COLOR_MUS, 2, false, 5);//blue
-			players.emplace_back(TEXT("EQU"), COLOR_EQU, 2, false, 5); //purple
+			//添加10个玩家
+			controller->players.clear();
+			controller->players.emplace_back(TEXT("キョン艦隊"), COLOR_KYON, 1, false, 0);
+			controller->players.emplace_back(TEXT("ハルヒ☆閣下☆艦隊"), COLOR_HARUHI, 1, true, 1);
+			controller->players.emplace_back(TEXT("古泉くん艦隊"), COLOR_KOIZUMI, 1, false, 2);
+			controller->players.emplace_back(TEXT("みくるちゃん艦隊"), COLOR_MIKURU, 1, false, 3);
+			controller->players.emplace_back(TEXT("ユキ艦隊"), COLOR_YUKI, 1, false, 4);
+			controller->players.emplace_back(TEXT("DIE"), COLOR_DIE, 2, true, 5);
+			controller->players.emplace_back(TEXT("LUP"), COLOR_LUP, 2, false, 5); //red
+			controller->players.emplace_back(TEXT("IRA"), COLOR_IRA, 2, false, 5);//yellow
+			controller->players.emplace_back(TEXT("MUS"), COLOR_MUS, 2, false, 5);//blue
+			controller->players.emplace_back(TEXT("EQU"), COLOR_EQU, 2, false, 5); //purple
 
-			players[0].team_btn.SetEnable(true);
+			//解锁自己
+			controller->players[0].team_btn.SetEnable(true);
 
 			//
 			if (controller->IsHost())
 			{
-				for (auto& player : players)
+				for (auto& player : controller->players)
 				{
 					player.team_btn.SetEnable(true);
 				}
@@ -129,12 +137,24 @@ int ScenePrepRoom::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		key = buttons[0].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 		if (key)
 		{
+			//TODO: 校验开始游戏条件
+
+			//初始化出生位置
+			for (auto& player : controller->players)
+			{
+				player.x = RandFloat(0, controller->bat_width);
+				player.y = RandFloat(0, controller->bat_height);
+			}
+			controller->players[0].x = 0;
+			controller->players[0].y = 0;
+
 			controller->PlaySoundEffect();
 			controller->GoGame(W, H);
 			return 0;
 		}
 
-		key = buttons[1].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));//取消
+		//点击取消
+		key = buttons[1].OnLButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 		if (key)
 		{
 			controller->PlaySoundEffect();
@@ -148,7 +168,8 @@ int ScenePrepRoom::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		int key = 0;
 
-		for (auto& player : players)
+		//
+		for (auto& player : controller->players)
 		{
 			if (player.team_btn.OnRButtonDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)))
 			{
@@ -223,9 +244,10 @@ void ScenePrepRoom::DrawList(float w, float h, float list_left, float list_botto
 	float y1_pos = header_bottom - header_content_y_interval - small_text_height;
 	for (int i = 0; i < 10; ++i)
 	{
-		if (i < players.size())
+		if (i < controller->players.size())
 		{
-			auto& player = players[i];
+			//玩家
+			auto& player = controller->players[i];
 
 			//king
 			float x1_pos = list_left;
@@ -277,6 +299,8 @@ void ScenePrepRoom::DrawList(float w, float h, float list_left, float list_botto
 		}
 		else
 		{
+			//空位
+
 			//king
 			float x1_pos = list_left;
 			float x2_pos = x1_pos + list_width * king_percent;
@@ -314,9 +338,10 @@ void ScenePrepRoom::DrawList(float w, float h, float list_left, float list_botto
 		y1_pos -= small_text_height + item_y_interval;
 	}
 
-	for (int i = 0; i < players.size(); ++i)
+	//绘制下拉菜单
+	for (int i = 0; i < controller->players.size(); ++i)
 	{
-		auto& player = players[i];
+		auto& player = controller->players[i];
 		if (i==0 || player.ai)
 		player.color_combo.DrawSpreadByClipCoord(w, h);
 	}

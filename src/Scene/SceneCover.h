@@ -22,7 +22,6 @@ private:
     std::unique_ptr<StarRender> starRender;
 public:
     SceneCover(SceneController* controller);
-    virtual ~SceneCover() override;
     void Start(int w, int h)override;
 
     virtual int WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam) override;

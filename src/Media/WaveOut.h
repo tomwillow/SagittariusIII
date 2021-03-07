@@ -16,6 +16,7 @@ public:
 	//write
 	void PlayAudio(char* buf, unsigned int nSize);
 
+	//reset -> 等待线程播放完成并退出 -> unprepare -> close
 	void Stop();
 private:
 	char* buf1,*buf2;
@@ -35,6 +36,8 @@ private:
 	void StartThread();
 	void StopThread();
 	void Open();
+
+	//unprepare & close
 	void Close();
 
 	inline void WaitForPlayingEnd();

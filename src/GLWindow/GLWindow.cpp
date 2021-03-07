@@ -1,5 +1,7 @@
 #include "GLWindow.h"
 
+#include <windowsx.h>
+
 #include "gl_assist.h"
 
 #include "ExternResource.h"
@@ -8,9 +10,20 @@ using namespace std;
 
 TTexture* GLWindow::tex_border=nullptr;
 
-GLWindow::GLWindow():
-    caption(make_unique<TFreeType>(TEXT("Window"),FONT_CJK)),
-    border(4),header(16),caption_align_center(false),bk_color({255,0,0,255})
+void GLWindow::Calc()
+{
+    ix1 = x1 + border;
+    iy1 = y1 + border;
+    iw = w - 2 * border;
+    ih = h - border - header;
+    ix2 = ix1 + iw;
+    iy2 = iy1 + ih;
+}
+
+GLWindow::GLWindow(std::tstring title):
+    caption(make_unique<TFreeType>(title,FONT_CJK)),
+    border(4),header(16),caption_align_center(false),bk_color({255,0,0,255}),
+    is_dragging(false),drag_start({0,0})
 {
     if (tex_border == nullptr)
     {
@@ -26,8 +39,18 @@ GLWindow::GLWindow():
     }
 }
 
+void GLWindow::ReleaseResource()
+{
+    if (tex_border)
+    {
+        delete[] tex_border;
+    }
+}
+
 void GLWindow::DrawByPiexl(int W, int H)
 {
+    this->W = W; this->H = H;
+
     EnableGeometry();
     glColor4ub(bk_color.r, bk_color.g, bk_color.b, bk_color.a);
     DrawRect(GL_QUADS, x1, y1, x1 + w, y1 + h);
@@ -63,19 +86,77 @@ void GLWindow::DrawByPiexl(int W, int H)
         center_diff = (x2 - x1 - 2 * border) / 2.0f - caption_width / 2.0f;
     }
     caption->DrawByPixel(x1+border+center_diff, y2 - header+border/2.0f);
+
+    Calc();
+
 }
 
 void GLWindow::SetWindow(float x1, float y1, float w, float h)
 {
     this->x1 = x1; this->y1 = y1; this->w = w; this->h = h;
+    Calc();
 }
 
 void GLWindow::SetSize(float w, float h)
 {
     this->w = w; this->h = h;
+    Calc();
 }
 
 void GLWindow::SetPos(float x1, float y1)
 {
     this->x1 = x1; this->y1 = y1;
+    Calc();
+}
+
+void GLWindow::SetTitle(std::tstring title)
+{
+    caption = make_unique<TFreeType>(title, FONT_CJK);
+}
+
+int GLWindow::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    int x = GET_X_LPARAM(lParam), y = H-GET_Y_LPARAM(lParam);
+    float x2 = x1 + w;
+    float y2 = y1 + h;
+    RECT rc_header = { x1 + border, y2 - header, x2 - border, y2 };
+    bool in_header = PtInRect(&rc_header, { x,y });
+    switch (uMsg)
+    {
+    case WM_LBUTTONDOWN:
+    {
+        if (in_header)
+        {
+            is_dragging = true;
+            drag_start = { x,y };
+            orig = { (LONG)x1,(LONG)y1 };
+            printf("start dragging\n");
+        }
+        break;
+    }
+    case WM_MOUSEMOVE:
+    {
+        if (is_dragging)
+        {
+            int dx = x - drag_start.x;
+            int dy = y - drag_start.y;
+            SetPos(orig.x+dx,orig.y+dy);
+            printf("moving\n");
+        }
+        break;
+    }
+    case WM_LBUTTONUP:
+    {
+        printf("end drag\n");
+        is_dragging = false;
+        break;
+    }
+    case WM_KILLFOCUS:
+    {
+        printf("end drag\n");
+        is_dragging = false;
+        break;
+    }
+    }
+    return 0;
 }

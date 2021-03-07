@@ -3,5 +3,7 @@
 class GLWndCommand :
     public GLWindow
 {
+public:
+	GLWndCommand();
 };
 

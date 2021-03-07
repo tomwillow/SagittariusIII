@@ -16,4 +16,5 @@ public:
 	void Bind(int samplerIndex=0);
 	unsigned int GetId();
 	void DrawByClipCoord(float x1, float y1, float x2, float y2);
+	void DrawCenterByPixel(float cx, float cy,float scale=1.0f);
 };

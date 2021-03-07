@@ -68,11 +68,6 @@ LRESULT TControl::DropProc(const std::vector<tstring>& dropFiles)
 }
 
 
-void TControl::LinkControl(HWND hDlg, int id)
-{
-	LinkControl(GetDlgItem(hDlg, id));
-}
-
 void TControl::SetFixedMargin(bool b, std::vector<bool> fixedMargin)
 {
 	assert(m_hWnd);
@@ -128,25 +123,6 @@ void TControl::OnSize()
 	AfterOnSize();
 }
 
-void TControl::LinkControl(HWND hWndCtrl)//链接到已有控件（用于对话框中）
-{
-	assert(hWndCtrl);
-	m_hInst = GetModuleHandle(NULL);
-	m_hParent = GetParent(hWndCtrl);
-	m_hWnd = hWndCtrl;
-
-	//测试发现subControlProc中会反复处理 uMsg=0x87, WM_GETDLGCODE 消息，
-	//查询 https://blog.csdn.net/amwfnyq/article/details/5612289 描述是控件
-	//没有 WS_EX_CONTROLPARENT 样式导致死循环
-	//LONG style = GetWindowLong(m_hWnd, GWL_EXSTYLE);
-	//SetWindowLong(m_hWnd, GWL_EXSTYLE, style | WS_EX_CONTROLPARENT);
-
-	//再次测试发现是两个HWND注册到同一个class导致死循环
-
-	RegisterProc();
-
-	DoAfterLinkControl();
-}
 
 
 LRESULT TControl::WndProc(WNDPROC wndproc, HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)//虚拟消息处理函数，可重载
@@ -159,10 +135,6 @@ LRESULT TControl::WndProc(WNDPROC wndproc, HWND hWnd, UINT uMsg, WPARAM wParam, 
 	return CallWindowProc(wndproc, hWnd, uMsg, wParam, lParam);
 }
 
-int TControl::GetID()
-{
-	return GetDlgCtrlID(m_hWnd);
-}
 
 
 void TControl::SetDragAccept(bool bCanAcceptDrop)

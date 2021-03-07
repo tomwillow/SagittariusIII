@@ -46,7 +46,8 @@ LRESULT TWindow::WndProc(WNDPROC defProc, HWND hWnd, UINT uMsg, WPARAM wParam, L
 	auto it = msgDealer.find(uMsg);
 	if (it != msgDealer.end())
 	{
-		return it->second(this,uMsg, wParam, lParam);
+		if (it->second(this, uMsg, wParam, lParam) == 0)
+			return 0;
 	}
 	switch (uMsg)
 	{
@@ -546,6 +547,7 @@ HDC win32_get_gl_dc(HWND hwnd)
 	pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
 	pfd.nVersion = 1;
 	pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;// 
+	pfd.cStencilBits = 1;
 	auto hdc = GetDC(hwnd);
 	auto pixelFormat = ChoosePixelFormat(hdc, &pfd);
 	if (!pixelFormat)

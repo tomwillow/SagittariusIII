@@ -141,8 +141,7 @@ void SceneYukiDispr::Render(int W, int H)
     float pixel = 24;
     float total_line = 26+2;//屏幕总行数+2
     float want_height = 2.0f / total_line;
-    float char_width = pixel * 2.0f / W;//单个字符的裁剪坐标宽度
-    float prefix_width = char_width * 7;//前缀宽度
+    float prefix_width = (float)prefix->GetWidthPixel()*2.0f/W;//前缀宽度
 
     EnableTexture();
     float coe = want_height / (pixel*2.0f / H);//字符大小调整系数，通过乘以系数使屏幕显示固定行数

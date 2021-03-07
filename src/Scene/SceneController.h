@@ -1,21 +1,11 @@
 #pragma once
 
+#include <set>
+
 #include "Scene.h"
-
 #include "TIniFile.h"
-
-
-#include <thread>
-
-#include "NSFRender.h"
-#ifdef _DEBUG
-#pragma comment(lib,"Debug/NSFRender.lib")
-#else
-#pragma comment(lib,"Release/NSFRender.lib")
-#endif
-
-#include "WaveFile.h"
-#include "WaveOut.h"
+#include "Player.h"
+#include "SoundManager.h"
 
 class Scene;
 class SceneController
@@ -23,16 +13,14 @@ class SceneController
 private:
 	bool isHost;
 	std::unique_ptr<Scene> scene;
+	SoundManager soundManager;
 
-	bool stopBGM;
-	std::unique_ptr<NSFRender> renderBGM, renderSelect;
-	std::unique_ptr<WaveOut> waveoutBGM, waveoutSelect;
-	std::unique_ptr<WaveFile> wavefile;
-	std::thread t;
-	void PlayBGMThread();
 public:
 	TIniFile ini;
 	TIniFile lang;
+	std::vector<Player> players;
+	float bat_width = 50.0f;
+	float bat_height = 120.0f;
 
 	SceneController(int w, int h);
 	~SceneController();

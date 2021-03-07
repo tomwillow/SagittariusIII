@@ -3,5 +3,7 @@
 class GLWndCondition :
     public GLWindow
 {
+public:
+	GLWndCondition();
 };
 

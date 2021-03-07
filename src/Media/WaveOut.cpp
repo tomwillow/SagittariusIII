@@ -81,6 +81,7 @@ void WaveOut::PlayAudio(char* in_buf, unsigned int in_size)
 		}
 		else
 		{
+			//一旦出现任意一个可写入，则break
 #ifdef _PRINT
 			printf("PlayAudio::break\n");
 #endif
@@ -88,6 +89,7 @@ void WaveOut::PlayAudio(char* in_buf, unsigned int in_size)
 		}
 	}
 
+	//将没有在播放的hdr设为当前hdr
 	char* now_buf=nullptr;
 	WAVEHDR* now_wavehdr = nullptr;
 	bool* now_playing = nullptr;
@@ -105,12 +107,12 @@ void WaveOut::PlayAudio(char* in_buf, unsigned int in_size)
 		now_playing = &isplaying2;
 	}
 
-	if (in_size > buf_size)
+	if (in_size > buf_size)//传入buf大于内置缓冲区，抛出异常
 	{
 		throw runtime_error("input buffer size is bigger than self");
 	}
 
-	if (in_size < buf_size)
+	if (in_size <= buf_size)
 	{
 		now_wavehdr->dwBufferLength = in_size;
 	}
@@ -202,26 +204,6 @@ void WaveOut::StopThread()
 			}
 		}
 		TerminateThread(m_hThread, 0);
-		//int t = 50;
-		//DWORD ExitCode;
-		//BOOL bEnd = FALSE;
-		//PostThreadMessage(m_ThreadID, WM_QUIT, 0, 0);
-		//while (t)
-		//{
-		//	GetExitCodeThread(m_hThread, &ExitCode);
-		//	if (ExitCode != STILL_ACTIVE)
-		//	{
-		//		bEnd = TRUE;
-		//		break;
-		//	}
-		//	else
-		//		Sleep(10);
-		//	t--;
-		//}
-		//if (!bEnd)
-		//{
-		//	TerminateThread(m_hThread, 0);
-		//}
 		m_hThread = 0;
 	}
 }
@@ -324,6 +306,7 @@ inline void WaveOut::WaitForPlayingEnd()
 
 void WaveOut::Stop()
 {
+	//先reset
 	MMRESULT mRet;
 	if ((mRet = waveOutReset(m_hWaveOut)) != MMSYSERR_NOERROR)
 	{
@@ -335,6 +318,7 @@ void WaveOut::Stop()
 	//等待播放完成
 	WaitForPlayingEnd();
 
+	//向线程发送关闭信号，阻塞直到线程退出
 	StopThread();
 
 	Close();

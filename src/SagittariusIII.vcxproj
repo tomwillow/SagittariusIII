@@ -134,8 +134,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='De_OpenGL|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;GLWindow;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\FILE\My Program\C++\2020.12.05 NSF_demo;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\out;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\FILE\My Program\C++\Sound\2020.12.05 NSF_demo;TControl;Common;Media;Scene;OpenGL;D:\REFER\Program\OpenGL\glm\glm-0.9.9.0;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\include;$(SolutionDir);StarRender;Dialog;GLControl;Network;GLDialog;GLWindow;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\FILE\My Program\C++\Sound\2020.12.05 NSF_demo;D:\REFER\Program\OpenGL\FreeType\freetype-2.10.4\out;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)..\$(Configuration)\</OutDir>
     <IntDir>..\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -306,6 +306,7 @@
     <ClCompile Include="OpenGL\TFreeType.cpp" />
     <ClCompile Include="OpenGL\TTexture.cpp" />
     <ClCompile Include="OpenGL\TVertexArray.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene\SceneGame.cpp" />
     <ClCompile Include="Scene\SceneYukiDispr.cpp" />
     <ClCompile Include="Scene\ScenePrepRoom.cpp" />
@@ -315,6 +316,7 @@
     <ClCompile Include="Scene\SceneCover.cpp" />
     <ClCompile Include="Scene\SceneIntro.cpp" />
     <ClCompile Include="OpenGL\TBox.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StarRender\Star.cpp" />
     <ClCompile Include="StarRender\StarRender.cpp" />
     <ClCompile Include="OpenGL\TBoxFreeType.cpp" />
@@ -333,6 +335,7 @@
     <ClCompile Include="GLControl\TGLColorCombo.cpp" />
     <ClCompile Include="TSmallWindow.cpp" />
     <ClCompile Include="Media\WaveOut.cpp" />
+    <ClCompile Include="Media\WaveOutEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ColorConfig.h" />
@@ -359,6 +362,7 @@
     <ClInclude Include="OpenGL\gl_assist.h" />
     <ClInclude Include="OpenGL\TTexture.h" />
     <ClInclude Include="OpenGL\TVertexArray.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene\SceneGame.h" />
     <ClInclude Include="Scene\SceneYukiDispr.h" />
@@ -369,6 +373,7 @@
     <ClInclude Include="Scene\SceneCover.h" />
     <ClInclude Include="Scene\SceneIntro.h" />
     <ClInclude Include="OpenGL\TBox.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StarRender\Star.h" />
     <ClInclude Include="StarRender\StarRender.h" />
     <ClInclude Include="OpenGL\TBoxFreeType.h" />
@@ -388,6 +393,7 @@
     <ClInclude Include="GLControl\TGLColorCombo.h" />
     <ClInclude Include="TSmallWindow.h" />
     <ClInclude Include="Media\WaveOut.h" />
+    <ClInclude Include="Media\WaveOutEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SagittariusIII.rc" />

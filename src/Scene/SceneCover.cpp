@@ -23,10 +23,6 @@ SceneCover::SceneCover(SceneController* controller) :
 {
 }
 
-SceneCover::~SceneCover()
-{
-}
-
 void SceneCover::Start(int w, int h)
 {
 	W = w, H = h;
