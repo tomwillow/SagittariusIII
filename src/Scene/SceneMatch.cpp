@@ -7,7 +7,7 @@
 using namespace std;
 
 SceneMatch::SceneMatch(SceneController* controller, int w, int h) :
-	Scene(controller), text(nullptr),searchDialog(nullptr)
+	Scene(controller), text(nullptr), searchDialog(nullptr)
 {
 	starRender = make_unique<StarRender>(w, h);
 
@@ -18,7 +18,7 @@ SceneMatch::SceneMatch(SceneController* controller, int w, int h) :
 }
 
 SceneMatch::SceneMatch(SceneController* controller, std::unique_ptr<StarRender>& lastStarRender) :
-	Scene(controller), text(nullptr),searchDialog(nullptr)
+	Scene(controller), text(nullptr), searchDialog(nullptr)
 {
 	starRender.reset(lastStarRender.release());
 
@@ -33,7 +33,7 @@ int SceneMatch::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	if (uMsg == WM_MOUSEMOVE)
 	{
 		int x = GET_X_LPARAM(lParam), y = GET_Y_LPARAM(lParam);
-	starRender->SetViewPosByWindowCoord(W, H, x, y);
+		starRender->SetViewPosByWindowCoord(W, H, x, y);
 	}
 
 	if (usernameDialog)
@@ -50,14 +50,14 @@ int SceneMatch::WndProc(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		if (key == IDCANCEL)
 		{
-		controller->GoCover(W, H);
+			controller->GoCover(W, H);
 		}
 		return 0;
 	}
 
 	if (searchDialog)
 	{
-		int key=searchDialog->WndProc(uMsg, wParam, lParam);
+		int key = searchDialog->WndProc(uMsg, wParam, lParam);
 		if (key == IDBUILDROOM)//开设房间
 		{
 			controller->GoPrepRoom(W, H);

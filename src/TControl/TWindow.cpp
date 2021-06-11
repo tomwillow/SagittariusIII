@@ -224,7 +224,7 @@ void TWindow::MyRegisterClass(LPCTSTR lpszClass)
 		wc.lpszClassName = lpszClass;
 
 		if (!RegisterClassEx(&wc))
-			throw runtime_error("aaa");
+			throw runtime_error("Failed in RegisterClassEx");
 	}
 }
 

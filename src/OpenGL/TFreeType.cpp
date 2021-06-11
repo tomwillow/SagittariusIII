@@ -10,12 +10,12 @@
 #pragma comment(lib,"Debug/freetyped.lib")
 #pragma comment(lib,"D:\\REFER\\Program\\lib\\bzip2\\bzip2-1.0.6\\Debug\\bzip2.lib")
 #pragma comment(lib,"D:\\REFER\\Program\\lib\\libpng\\libpng-1.6.35\\out\\Debug\\libpng16_staticd.lib")
-#pragma comment(lib,"D:\\REFER\\Program\\lib\\zlib\\zlib-1.2.11\\out\\Debug\\zlibstaticd.lib")
+#pragma comment(lib,"D:\\REFER\\Program\\lib\\zlib\\zlib-1.2.11\\contrib\\vstudio\\vc14\\x86\\ZlibStatDebug\\zlibstat.lib")
 #else
 #pragma comment(lib,"Release/freetype.lib")
 #pragma comment(lib,"D:\\REFER\\Program\\lib\\bzip2\\bzip2-1.0.6\\Release\\bzip2.lib")
 #pragma comment(lib,"D:\\REFER\\Program\\lib\\libpng\\libpng-1.6.35\\out\\Release\\libpng16_static.lib")
-#pragma comment(lib,"D:\\REFER\\Program\\lib\\zlib\\zlib-1.2.11\\out\\Release\\zlibstatic.lib")
+#pragma comment(lib,"D:\\REFER\\Program\\lib\\zlib\\zlib-1.2.11\\contrib\\vstudio\\vc14\\x86\\ZlibStatRelease\\zlibstat.lib")
 #endif
 
 using namespace std;
